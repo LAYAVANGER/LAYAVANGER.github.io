@@ -258,7 +258,6 @@
     <div class="downloads" aria-label="Game Downloads">
       <a href="https://www.callofduty.com/warzone" target="_blank" rel="noopener noreferrer" class="download-btn" onclick="playClick()">Download Warzone</a>
       <a href="https://blog.counter-strike.net/" target="_blank" rel="noopener noreferrer" class="download-btn" onclick="playClick()">Download Counter-Strike 2</a>
-      <a href="https://www.rocketleague.com/download" target="_blank" rel="noopener noreferrer" class="download-btn" onclick="playClick()">Download Rocket League</a>
     </div>
 
     <p class="note">⚠️ TLauncher is unofficial Minecraft software. Use at your own risk.</p>
@@ -284,4 +283,82 @@
         shape: { type: "circle" },
         opacity: { value: 0.5 },
         size: { value: 3 },
-        line_linked:
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#00ffff",
+          opacity: 0.4,
+          width: 1
+        },
+        move: { enable: true, speed: 2 }
+      },
+      interactivity: {
+        events: {
+          onhover: { enable: true, mode: "repulse" },
+          onclick: { enable: true, mode: "push" }
+        }
+      },
+      retina_detect: true
+    });
+
+    function toggleMode() {
+      document.body.classList.toggle("light-mode");
+    }
+
+    function playClick() {
+      const audio = document.getElementById("clickSound");
+      audio.currentTime = 0;
+      audio.play();
+    }
+
+    function switchTab(id) {
+      const containers = document.querySelectorAll(".container");
+      containers.forEach(c => {
+        if (c.id === id) {
+          c.classList.add("active");
+          c.setAttribute("aria-hidden", "false");
+        } else {
+          c.classList.remove("active");
+          c.setAttribute("aria-hidden", "true");
+        }
+      });
+
+      // Update aria-selected on buttons
+      document.querySelectorAll(".tab-button").forEach(btn => {
+        if (btn.getAttribute("aria-controls") === id) {
+          btn.setAttribute("aria-selected", "true");
+        } else if (btn.hasAttribute("aria-controls")) {
+          btn.setAttribute("aria-selected", "false");
+        }
+      });
+    }
+
+    // GTA 6 countdown
+    const countdownElement = document.getElementById("countdown");
+    const releaseDate = new Date("2025-10-01T00:00:00Z").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = releaseDate - now;
+
+      if (distance <= 0) {
+        countdownElement.textContent = "🎉 GTA 6 is Released! 🎉";
+        clearInterval(countdownInterval);
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdownElement.textContent =
+        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    const countdownInterval = setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>
+
