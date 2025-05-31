@@ -27,7 +27,6 @@
       background-color: var(--bg-color);
       color: var(--text-color);
       transition: all 0.3s ease;
-      overflow-x: hidden;
     }
 
     #particles-js {
@@ -43,11 +42,9 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 100px 20px 60px 20px;
+      padding: 80px 20px;
       min-height: 100vh;
       text-align: center;
-      max-width: 900px;
-      margin: 0 auto;
     }
 
     .container.active {
@@ -59,12 +56,7 @@
       margin: 20px 0 40px;
     }
 
-    h2 {
-      margin-top: 40px;
-      color: var(--accent);
-    }
-
-    a, button, .tab-button {
+    a, button, .tab-button, input[type="submit"] {
       display: inline-block;
       margin: 15px;
       padding: 14px 24px;
@@ -78,36 +70,22 @@
       transition: background-color 0.3s ease;
     }
 
-    a:hover, button:hover, .tab-button:hover {
+    a:hover, button:hover, .tab-button:hover, input[type="submit"]:hover {
       background-color: var(--accent);
       color: var(--button-text);
     }
 
-    .note {
-      margin-top: 40px;
-      font-size: 14px;
-      color: #aaa;
-      max-width: 600px;
+    input, textarea {
+      width: 300px;
+      padding: 10px;
+      margin: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
     }
 
     .tabs {
       text-align: center;
       padding-top: 20px;
-      position: sticky;
-      top: 0;
-      background-color: var(--bg-color);
-      z-index: 10;
-      border-bottom: 1px solid var(--accent);
-    }
-
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 24px;
-      }
-      a, button, .tab-button {
-        font-size: 16px;
-        padding: 12px 20px;
-      }
     }
 
     #countdown {
@@ -116,52 +94,10 @@
       color: var(--accent);
     }
 
-    /* Support Form Styles */
-    form {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      max-width: 500px;
-      margin-top: 20px;
-    }
-
-    label {
-      margin: 10px 0 5px;
-      text-align: left;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    input, textarea {
-      padding: 10px;
-      border-radius: 8px;
-      border: none;
-      font-size: 16px;
-      resize: vertical;
-    }
-
-    textarea {
-      min-height: 120px;
-    }
-
-    input[type="submit"] {
-      margin-top: 20px;
-      background-color: var(--accent);
-      color: var(--button-text);
-      cursor: pointer;
-      font-weight: bold;
-      transition: background-color 0.3s ease;
-    }
-
-    input[type="submit"]:hover {
-      background-color: #00bbbb;
-    }
-
-    /* Poll result style */
-    #pollResult {
-      margin-top: 10px;
-      color: var(--accent);
-      font-weight: bold;
+    .note {
+      font-size: 14px;
+      color: #aaa;
+      margin-top: 30px;
     }
   </style>
 </head>
@@ -171,83 +107,69 @@
   <div class="tabs">
     <button class="tab-button" onclick="switchTab('main'); playClick()">🏠 Home</button>
     <button class="tab-button" onclick="switchTab('gta'); playClick()">🎮 GTA 6 Countdown</button>
-    <button class="tab-button" onclick="switchTab('games'); playClick()">🎮 Downloads</button>
-    <button class="tab-button" onclick="switchTab('support'); playClick()">🛠 Support Center</button>
+    <button class="tab-button" onclick="switchTab('downloads'); playClick()">⬇️ Downloads</button>
+    <button class="tab-button" onclick="switchTab('support'); playClick()">🛠 Support</button>
     <button class="tab-button" onclick="toggleMode(); playClick()">🌓 Toggle Mode</button>
   </div>
 
-  <!-- Home Tab -->
   <div id="main" class="container active">
-    <h1>🚀 Welcome to My Launcher Hub</h1>
+    <h1>🚀 Welcome to Layavanger Hub</h1>
     <a href="https://tlauncher.org/en/" onclick="playClick()" target="_blank">Download TLauncher</a>
-    <a href="https://youtube.com/@layavanger_1?si=2_4KTvuQVhIQm9xg" onclick="playClick()" target="_blank">Visit My YouTube Channel</a>
+    <a href="https://youtube.com/@layavanger_1" onclick="playClick()" target="_blank">Visit My YouTube Channel</a>
     <p class="note">⚠️ TLauncher is unofficial Minecraft software. Use at your own risk.</p>
   </div>
 
-  <!-- GTA 6 Countdown Tab -->
   <div id="gta" class="container">
     <h1>🎮 Countdown to GTA 6 Release</h1>
     <div id="countdown">Loading...</div>
     <p class="note">Expected release: October 1, 2025</p>
   </div>
 
-  <!-- Downloads Tab -->
-  <div id="games" class="container">
+  <div id="downloads" class="container">
     <h1>🎮 Game Downloads</h1>
-    <a href="https://www.activision.com/warzone" target="_blank" onclick="playClick()">Download Warzone</a>
-    <a href="https://blog.counter-strike.net/" target="_blank" onclick="playClick()">Download Counter-Strike 2</a>
-
-    <h2>🎮 Which game do you want next?</h2>
-    <form id="gamePoll" onsubmit="return submitPoll(event)">
-      <label><input type="radio" name="nextGame" value="Fortnite" required> Fortnite</label><br/>
-      <label><input type="radio" name="nextGame" value="Apex Legends"> Apex Legends</label><br/>
-      <label><input type="radio" name="nextGame" value="Valorant"> Valorant</label><br/>
-      <label><input type="radio" name="nextGame" value="Minecraft"> Minecraft</label><br/>
-      <label><input type="radio" name="nextGame" value="Other"> Other</label><br/>
+    <a href="https://www.callofduty.com/warzone" target="_blank">Download Warzone</a>
+    <a href="https://store.steampowered.com/app/730/CounterStrike_2/" target="_blank">Download Counter-Strike 2</a>
+    <h2 style="margin-top: 40px">🗳️ Vote for the Next Game</h2>
+    <form id="gamePoll" onsubmit="submitPoll(event)">
+      <label>Which game should we add next?</label><br>
+      <input type="radio" name="nextGame" value="Fortnite" required /> Fortnite<br>
+      <input type="radio" name="nextGame" value="Valorant" /> Valorant<br>
+      <input type="radio" name="nextGame" value="PUBG" /> PUBG<br>
+      <br>
       <input type="submit" value="Vote" />
     </form>
-    <p id="pollResult"></p>
+    <p id="pollResult" class="note"></p>
   </div>
 
-  <!-- Support Center Tab -->
   <div id="support" class="container">
     <h1>🛠 Support Center</h1>
-    <p class="note">If you have any complaints or issues, please fill out the form below. Your message will be sent to <strong>layavanger@gmail.com</strong>.</p>
-    <form id="supportForm" onsubmit="return sendComplaint(event)">
-      <label for="name">Your Name:</label>
-      <input type="text" id="name" name="name" required placeholder="Enter your name" />
-
-      <label for="email">Your Email:</label>
-      <input type="email" id="email" name="email" required placeholder="Enter your email" />
-
-      <label for="message">Complaint / Message:</label>
-      <textarea id="message" name="message" required placeholder="Describe your issue or complaint here"></textarea>
-
+    <form onsubmit="sendComplaint(event)">
+      <input type="text" id="name" placeholder="Your Name" required /><br>
+      <input type="email" id="email" placeholder="Your Email" required /><br>
+      <textarea id="message" placeholder="Your Complaint" rows="5" required></textarea><br>
       <input type="submit" value="Send Complaint" />
     </form>
   </div>
 
-  <!-- Click sound -->
   <audio id="clickSound" src="https://assets.mixkit.co/sfx/preview/mixkit-video-game-mystery-alert-234.wav"></audio>
 
-  <!-- Particles -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script>
     particlesJS("particles-js", {
       particles: {
         number: { value: 50 },
-        color: { value: "#00cccc" },
+        color: { value: "#00ffff" },
         shape: { type: "circle" },
         opacity: { value: 0.3 },
         size: { value: 3 },
         line_linked: {
           enable: true,
-          distance: 120,
-          color: "#00cccc",
-          opacity: 0.25,
+          distance: 150,
+          color: "#00ffff",
+          opacity: 0.2,
           width: 1
         },
-        move: { enable: true, speed: 1.5 }
+        move: { enable: true, speed: 2 }
       },
       interactivity: {
         events: {
@@ -273,7 +195,6 @@
       document.getElementById(id).classList.add('active');
     }
 
-    // Countdown Logic
     const countdown = document.getElementById("countdown");
     const gtaRelease = new Date("2025-10-01T00:00:00").getTime();
     setInterval(() => {
@@ -293,7 +214,6 @@
       countdown.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
     }, 1000);
 
-    // Support Form Submit
     function sendComplaint(event) {
       event.preventDefault();
       const name = document.getElementById("name").value.trim();
@@ -305,13 +225,11 @@
         return false;
       }
 
-      const mailto = `mailto:layavanger@gmail.com?subject=Support%20Request%20from%20${encodeURIComponent(name)}&body=${encodeURIComponent("Name: " + name + "\nEmail: " + email + "\n\nMessage:\n" + message)}`;
-      
-      window.location.href = mailto;
+      const mailto = `https://mail.google.com/mail/?view=cm&fs=1&to=layavanger@gmail.com&su=Support%20Request%20from%20${encodeURIComponent(name)}&body=${encodeURIComponent("Name: " + name + "\nEmail: " + email + "\n\nMessage:\n" + message)}`;
+      window.open(mailto, '_blank');
       return false;
     }
 
-    // Poll submit handler
     function submitPoll(event) {
       event.preventDefault();
       const form = document.getElementById("gamePoll");
@@ -324,3 +242,4 @@
   </script>
 </body>
 </html>
+
