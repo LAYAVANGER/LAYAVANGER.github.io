@@ -59,6 +59,11 @@
       margin: 20px 0 40px;
     }
 
+    h2 {
+      margin-top: 40px;
+      color: var(--accent);
+    }
+
     a, button, .tab-button {
       display: inline-block;
       margin: 15px;
@@ -124,6 +129,7 @@
       margin: 10px 0 5px;
       text-align: left;
       font-weight: bold;
+      cursor: pointer;
     }
 
     input, textarea {
@@ -149,6 +155,13 @@
 
     input[type="submit"]:hover {
       background-color: #00bbbb;
+    }
+
+    /* Poll result style */
+    #pollResult {
+      margin-top: 10px;
+      color: var(--accent);
+      font-weight: bold;
     }
   </style>
 </head>
@@ -183,6 +196,17 @@
     <h1>🎮 Game Downloads</h1>
     <a href="https://www.activision.com/warzone" target="_blank" onclick="playClick()">Download Warzone</a>
     <a href="https://blog.counter-strike.net/" target="_blank" onclick="playClick()">Download Counter-Strike 2</a>
+
+    <h2>🎮 Which game do you want next?</h2>
+    <form id="gamePoll" onsubmit="return submitPoll(event)">
+      <label><input type="radio" name="nextGame" value="Fortnite" required> Fortnite</label><br/>
+      <label><input type="radio" name="nextGame" value="Apex Legends"> Apex Legends</label><br/>
+      <label><input type="radio" name="nextGame" value="Valorant"> Valorant</label><br/>
+      <label><input type="radio" name="nextGame" value="Minecraft"> Minecraft</label><br/>
+      <label><input type="radio" name="nextGame" value="Other"> Other</label><br/>
+      <input type="submit" value="Vote" />
+    </form>
+    <p id="pollResult"></p>
   </div>
 
   <!-- Support Center Tab -->
@@ -269,10 +293,9 @@
       countdown.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
     }, 1000);
 
-    // Support form mailto handler
+    // Support Form Submit
     function sendComplaint(event) {
       event.preventDefault();
-
       const name = document.getElementById("name").value.trim();
       const email = document.getElementById("email").value.trim();
       const message = document.getElementById("message").value.trim();
@@ -285,6 +308,17 @@
       const mailto = `mailto:layavanger@gmail.com?subject=Support%20Request%20from%20${encodeURIComponent(name)}&body=${encodeURIComponent("Name: " + name + "\nEmail: " + email + "\n\nMessage:\n" + message)}`;
       
       window.location.href = mailto;
+      return false;
+    }
+
+    // Poll submit handler
+    function submitPoll(event) {
+      event.preventDefault();
+      const form = document.getElementById("gamePoll");
+      const selected = form.nextGame.value;
+      const result = document.getElementById("pollResult");
+      result.textContent = `Thanks for voting! You chose: ${selected}`;
+      form.reset();
       return false;
     }
   </script>
