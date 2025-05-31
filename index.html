@@ -23,10 +23,12 @@
     body {
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: var(--bg-color);
       color: var(--text-color);
       transition: all 0.3s ease;
+      perspective: 1000px; /* for 3D effect */
+      overflow-x: hidden;
     }
 
     #particles-js {
@@ -45,17 +47,41 @@
       padding: 100px 20px;
       min-height: 100vh;
       text-align: center;
+      opacity: 0;
+      transform-style: preserve-3d;
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      will-change: opacity, transform;
     }
 
     .container.active {
       display: flex;
+      opacity: 1;
+      transform: translateZ(0);
     }
 
+    /* Rotating 3D heading */
     h1 {
       color: var(--accent);
       margin: 20px 0 40px;
+      font-size: 3em;
+      animation: rotate3D 8s linear infinite;
+      transform-style: preserve-3d;
+      text-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent);
     }
 
+    @keyframes rotate3D {
+      0% {
+        transform: rotateY(0deg) rotateX(0deg);
+      }
+      50% {
+        transform: rotateY(180deg) rotateX(20deg);
+      }
+      100% {
+        transform: rotateY(360deg) rotateX(0deg);
+      }
+    }
+
+    /* Buttons and tabs */
     a, button, .tab-button {
       display: inline-block;
       margin: 15px;
@@ -64,66 +90,84 @@
       background-color: var(--button-bg);
       color: var(--button-text);
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
       text-decoration: none;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      transform-style: preserve-3d;
+      box-shadow:
+        0 4px 8px rgba(0, 255, 255, 0.2),
+        0 0 20px rgba(0, 255, 255, 0.3);
+      will-change: transform;
+      perspective: 1000px;
     }
 
     a:hover, button:hover, .tab-button:hover {
       background-color: var(--accent);
       color: var(--button-text);
+      transform: translateZ(20px) rotateX(10deg) rotateY(5deg);
+      box-shadow:
+        0 8px 16px rgba(0, 255, 255, 0.5),
+        0 0 40px rgba(0, 255, 255, 0.8);
     }
 
     .note {
       margin-top: 40px;
       font-size: 14px;
       color: #aaa;
+      max-width: 600px;
+      line-height: 1.4;
     }
 
     .tabs {
       text-align: center;
       padding-top: 20px;
+      perspective: 800px;
+    }
+
+    #countdown {
+      font-size: 36px;
+      margin-top: 20px;
+      color: var(--accent);
+      text-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent);
+      font-weight: 700;
     }
 
     @media (max-width: 600px) {
       h1 {
-        font-size: 24px;
+        font-size: 2em;
       }
       a, button, .tab-button {
         font-size: 16px;
         padding: 12px 20px;
       }
-    }
-
-    #countdown {
-      font-size: 28px;
-      margin-top: 20px;
-      color: var(--accent);
+      #countdown {
+        font-size: 28px;
+      }
     }
   </style>
 </head>
 <body>
   <div id="particles-js"></div>
 
-  <div class="tabs">
-    <button class="tab-button" onclick="switchTab('main'); playClick()">🏠 Home</button>
-    <button class="tab-button" onclick="switchTab('gta'); playClick()">🎮 GTA 6 Countdown</button>
-    <button class="tab-button" onclick="toggleMode(); playClick()">🌓 Toggle Mode</button>
+  <div class="tabs" role="tablist" aria-label="Main navigation">
+    <button class="tab-button" onclick="switchTab('main'); playClick()" role="tab" aria-selected="true" aria-controls="main" id="tab-home">🏠 Home</button>
+    <button class="tab-button" onclick="switchTab('gta'); playClick()" role="tab" aria-selected="false" aria-controls="gta" id="tab-gta">🎮 GTA 6 Countdown</button>
+    <button class="tab-button" onclick="toggleMode(); playClick()" aria-label="Toggle light/dark mode">🌓 Toggle Mode</button>
   </div>
 
   <!-- Home Tab -->
-  <div id="main" class="container active">
+  <div id="main" class="container active" role="tabpanel" aria-labelledby="tab-home">
     <h1>🚀 Welcome to My Launcher Hub</h1>
-    <a href="https://tlauncher.org/en/" onclick="playClick()" target="_blank">Download TLauncher</a>
-    <a href="https://youtube.com/@layavanger_1?si=2_4KTvuQVhIQm9xg" onclick="playClick()" target="_blank">Visit My YouTube Channel</a>
+    <a href="https://tlauncher.org/en/" onclick="playClick()" target="_blank" rel="noopener">Download TLauncher</a>
+    <a href="https://youtube.com/@layavanger_1?si=2_4KTvuQVhIQm9xg" onclick="playClick()" target="_blank" rel="noopener">Visit My YouTube Channel</a>
     <p class="note">⚠️ TLauncher is unofficial Minecraft software. Use at your own risk.</p>
   </div>
 
   <!-- GTA 6 Countdown Tab -->
-  <div id="gta" class="container">
+  <div id="gta" class="container" role="tabpanel" aria-labelledby="tab-gta" tabindex="0">
     <h1>🎮 Countdown to GTA 6 Release</h1>
-    <div id="countdown">Loading...</div>
+    <div id="countdown" aria-live="polite" aria-atomic="true">Loading...</div>
     <p class="note">Expected release: October 1, 2025</p>
   </div>
 
@@ -169,8 +213,22 @@
     }
 
     function switchTab(id) {
-      document.querySelectorAll('.container').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('.container').forEach(c => {
+        c.classList.remove('active');
+        c.setAttribute('aria-hidden', 'true');
+      });
       document.getElementById(id).classList.add('active');
+      document.getElementById(id).removeAttribute('aria-hidden');
+
+      // Update aria-selected on tabs
+      document.querySelectorAll('.tab-button[role="tab"]').forEach(button => {
+        button.setAttribute('aria-selected', 'false');
+      });
+      if (id === 'main') {
+        document.getElementById('tab-home').setAttribute('aria-selected', 'true');
+      } else if (id === 'gta') {
+        document.getElementById('tab-gta').setAttribute('aria-selected', 'true');
+      }
     }
 
     // Countdown Logic
