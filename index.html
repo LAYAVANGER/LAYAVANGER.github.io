@@ -21,7 +21,6 @@
       color: var(--text-color);
       transition: all 0.3s ease;
       cursor: url('https://cur.cursors-4u.net/games/gam-16/gam1535.cur'), auto;
-      overflow: hidden;
     }
 
     #particles-js {
@@ -30,6 +29,15 @@
       width: 100%;
       height: 100%;
       z-index: -1;
+    }
+
+    .fade-in {
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .container {
@@ -44,12 +52,6 @@
 
     .container.active {
       display: flex;
-      animation: fadeIn 1s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
     }
 
     h1 {
@@ -57,7 +59,7 @@
       margin: 20px 0 40px;
     }
 
-    a, button {
+    a, button, .tab-button {
       display: inline-block;
       margin: 15px;
       padding: 14px 24px;
@@ -68,11 +70,12 @@
       border-radius: 10px;
       text-decoration: none;
       cursor: pointer;
-      transition: 0.3s ease;
+      transition: background-color 0.3s ease;
     }
 
-    a:hover, button:hover {
-      background-color: #00cccc;
+    a:hover, button:hover, .tab-button:hover {
+      background-color: var(--accent);
+      color: var(--button-text);
     }
 
     .note {
@@ -86,15 +89,20 @@
       padding-top: 20px;
     }
 
-    @media (max-width: 600px) {
-      h1 { font-size: 24px; }
-      a, button { font-size: 16px; padding: 12px 20px; }
-    }
-
     #countdown {
       font-size: 28px;
       margin-top: 20px;
       color: var(--accent);
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 24px;
+      }
+      a, button, .tab-button {
+        font-size: 16px;
+        padding: 12px 20px;
+      }
     }
   </style>
 </head>
@@ -103,48 +111,71 @@
 
   <div class="tabs">
     <button class="tab-button" onclick="switchTab('main'); playClick()">🏠 Home</button>
-    <button class="tab-button" onclick="switchTab('games'); playClick()">🎮 Games</button>
-    <button class="tab-button" onclick="switchTab('gta'); playClick()">⏳ GTA 6</button>
-    <button class="tab-button" onclick="switchTab('support'); playClick()">💬 Support</button>
+    <button class="tab-button" onclick="switchTab('gta'); playClick()">🎮 GTA 6</button>
+    <button class="tab-button" onclick="switchTab('warzone'); playClick()">🔥 Warzone</button>
+    <button class="tab-button" onclick="switchTab('cs2'); playClick()">🧨 Counter-Strike 2</button>
+    <button class="tab-button" onclick="switchTab('fortnite'); playClick()">🌀 Fortnite</button>
+    <button class="tab-button" onclick="switchTab('valorant'); playClick()">🎯 Valorant</button>
+    <button class="tab-button" onclick="switchTab('inside'); playClick()">💬 Inside</button>
+    <button class="tab-button" onclick="switchTab('support'); playClick()">📩 Support</button>
   </div>
 
-  <!-- Home Tab -->
-  <div id="main" class="container active">
+  <!-- Home -->
+  <div id="main" class="container active fade-in">
     <h1>🚀 Welcome to Layavanger Hub</h1>
-    <a href="https://tlauncher.org/en/" onclick="playClick()" target="_blank">Download TLauncher</a>
-    <a href="https://youtube.com/@layavanger_1?si=2_4KTvuQVhIQm9xg" onclick="playClick()" target="_blank">Visit My YouTube Channel</a>
+    <a href="https://tlauncher.org/en/" target="_blank" onclick="playClick()">Download TLauncher</a>
+    <a href="https://youtube.com/@layavanger_1?si=2_4KTvuQVhIQm9xg" target="_blank" onclick="playClick()">Visit My YouTube</a>
     <p class="note">⚠️ TLauncher is unofficial Minecraft software. Use at your own risk.</p>
   </div>
 
-  <!-- Games Tab -->
-  <div id="games" class="container">
-    <h1>🔥 Download Games</h1>
-    <a href="#" target="_blank">Download Warzone</a>
-    <a href="#" target="_blank">Download Counter-Strike 2</a>
-    <a href="#" target="_blank">Download Valorant</a>
-    <a href="#" target="_blank">Download Fortnite</a>
-    <a href="https://t.me/Inside_layavanger" target="_blank">Inside</a>
-    <p class="note">💬 Which game should we add next?</p>
-  </div>
-
-  <!-- GTA Countdown Tab -->
-  <div id="gta" class="container">
+  <!-- GTA -->
+  <div id="gta" class="container fade-in">
     <h1>🎮 Countdown to GTA 6 Release</h1>
     <div id="countdown">Loading...</div>
     <p class="note">Expected release: October 1, 2025</p>
   </div>
 
-  <!-- Support Tab -->
-  <div id="support" class="container">
-    <h1>📨 Support Center</h1>
-    <p>If you have complaints or questions, email us at:</p>
-    <a href="mailto:layavanger@gmai.com">layavanger@gmai.com</a>
+  <!-- Warzone -->
+  <div id="warzone" class="container fade-in">
+    <h1>🔥 Download Warzone</h1>
+    <a href="https://www.callofduty.com/warzone" target="_blank" onclick="playClick()">Official Site</a>
   </div>
 
-  <!-- Click Sound -->
+  <!-- CS2 -->
+  <div id="cs2" class="container fade-in">
+    <h1>🧨 Download Counter-Strike 2</h1>
+    <a href="https://store.steampowered.com/app/730/CounterStrike_2/" target="_blank" onclick="playClick()">Download on Steam</a>
+  </div>
+
+  <!-- Fortnite -->
+  <div id="fortnite" class="container fade-in">
+    <h1>🌀 Download Fortnite</h1>
+    <a href="https://www.fortnite.com/download" target="_blank" onclick="playClick()">Get Fortnite</a>
+  </div>
+
+  <!-- Valorant -->
+  <div id="valorant" class="container fade-in">
+    <h1>🎯 Download Valorant</h1>
+    <a href="https://playvalorant.com/" target="_blank" onclick="playClick()">Official Website</a>
+  </div>
+
+  <!-- Inside (Telegram) -->
+  <div id="inside" class="container fade-in">
+    <h1>💬 Inside Layavanger</h1>
+    <a href="https://t.me/Inside_layavanger" target="_blank" onclick="playClick()">Join on Telegram</a>
+  </div>
+
+  <!-- Support -->
+  <div id="support" class="container fade-in">
+    <h1>📩 Support Center</h1>
+    <p>If you have any complaints or need help, contact us at:</p>
+    <a href="mailto:layavanger@gmail.com">layavanger@gmail.com</a>
+  </div>
+
+  <!-- Audio -->
   <audio id="clickSound" src="https://assets.mixkit.co/sfx/preview/mixkit-video-game-mystery-alert-234.wav"></audio>
 
-  <!-- Particles.js -->
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script>
     particlesJS("particles-js", {
@@ -152,16 +183,16 @@
         number: { value: 70 },
         color: { value: "#00ffff" },
         shape: { type: "circle" },
-        opacity: { value: 0.3 },
+        opacity: { value: 0.25 },
         size: { value: 3 },
         line_linked: {
           enable: true,
           distance: 150,
           color: "#00ffff",
-          opacity: 0.3,
+          opacity: 0.2,
           width: 1
         },
-        move: { enable: true, speed: 1.5 }
+        move: { enable: true, speed: 2 }
       },
       interactivity: {
         events: {
@@ -172,6 +203,12 @@
       retina_detect: true
     });
 
+    function toggleFade(el) {
+      el.classList.remove("fade-in");
+      void el.offsetWidth; // force reflow
+      el.classList.add("fade-in");
+    }
+
     function playClick() {
       const audio = document.getElementById("clickSound");
       audio.currentTime = 0;
@@ -180,10 +217,12 @@
 
     function switchTab(id) {
       document.querySelectorAll('.container').forEach(c => c.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
+      const target = document.getElementById(id);
+      target.classList.add('active');
+      toggleFade(target);
     }
 
-    // GTA Countdown
+    // Countdown Timer
     const countdown = document.getElementById("countdown");
     const gtaRelease = new Date("2025-10-01T00:00:00").getTime();
     setInterval(() => {
