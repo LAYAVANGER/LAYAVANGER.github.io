@@ -86,13 +86,6 @@
       padding-top: 20px;
     }
 
-    .logo {
-      width: 100px;
-      border-radius: 50%;
-      margin-top: 10px;
-      cursor: pointer;
-    }
-
     #countdown {
       font-size: 24px;
       margin-top: 20px;
@@ -101,6 +94,8 @@
 
     form {
       margin-top: 20px;
+      width: 300px;
+      max-width: 90%;
     }
 
     input, textarea {
@@ -109,12 +104,26 @@
       border: none;
       width: 100%;
       margin-top: 10px;
+      font-size: 16px;
     }
 
     @media (max-width: 600px) {
       h1 {
         font-size: 22px;
       }
+    }
+
+    /* Rocket popup style */
+    #rocketPopup {
+      position: fixed;
+      bottom: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 48px;
+      opacity: 0;
+      transition: bottom 1.5s ease-out, opacity 1.5s ease-out;
+      pointer-events: none;
+      z-index: 9999;
     }
   </style>
 </head>
@@ -127,12 +136,12 @@
     <button class="tab-button" onclick="switchTab('downloads'); playClick()">📥 Game Downloads</button>
     <button class="tab-button" onclick="switchTab('suggest'); playClick()">🗳️ Suggest a Game</button>
     <button class="tab-button" onclick="switchTab('support'); playClick()">🛠️ Support</button>
+    <button class="tab-button" id="rocketButton" title="Click me for a surprise!">🚀</button>
     <button class="tab-button" onclick="toggleMode(); playClick()">🌓 Toggle Mode</button>
   </div>
 
   <!-- Home -->
   <div id="main" class="container active">
-    <img src="channels4_profile.jpg" alt="Layavanger Logo" class="logo" onclick="triggerEasterEgg()" />
     <h1>🚀 Welcome to Layavanger Hub</h1>
     <a href="https://tlauncher.org/en/" target="_blank">Download TLauncher</a>
     <a href="https://youtube.com/@layavanger_1" target="_blank">Visit My YouTube Channel</a>
@@ -156,8 +165,8 @@
   <!-- Suggest a Game -->
   <div id="suggest" class="container">
     <h1>🗳️ Suggest the Next Game</h1>
-    <form onsubmit="alert('Thanks for your suggestion!'); return false;">
-      <input type="text" placeholder="Your game suggestion..." required />
+    <form onsubmit="handleSuggestion(event)">
+      <input type="text" id="gameSuggestion" placeholder="Your game suggestion..." required />
       <button type="submit">Send</button>
     </form>
   </div>
@@ -169,15 +178,13 @@
     <a href="mailto:layavanger@gmail.com">layavanger@gmail.com</a>
   </div>
 
-  <!-- Easter Egg Confetti -->
-  <canvas id="confetti-canvas" style="position:fixed;pointer-events:none;top:0;left:0;width:100%;height:100%;z-index:999;"></canvas>
+  <!-- Rocket popup -->
+  <div id="rocketPopup">🚀</div>
 
   <!-- Sound -->
   <audio id="clickSound" src="https://assets.mixkit.co/sfx/preview/mixkit-video-game-mystery-alert-234.wav"></audio>
 
-  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script>
     // Particles
     particlesJS("particles-js", {
@@ -205,7 +212,7 @@
       retina_detect: true
     });
 
-    // Tabs
+    // Tabs switch
     function switchTab(id) {
       document.querySelectorAll('.container').forEach(c => c.classList.remove('active'));
       document.getElementById(id).classList.add('active');
@@ -223,7 +230,7 @@
       audio.play();
     }
 
-    // Countdown
+    // Countdown timer
     const countdown = document.getElementById("countdown");
     const gtaRelease = new Date("2025-10-01T00:00:00").getTime();
     setInterval(() => {
@@ -240,14 +247,26 @@
       countdown.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
     }, 1000);
 
-    // Easter Egg
-    function triggerEasterEgg() {
-      confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 }
-      });
+    // Suggestion form (just clears input and alerts)
+    function handleSuggestion(event) {
+      event.preventDefault();
+      const suggestion = document.getElementById('gameSuggestion').value.trim();
+      if (suggestion) {
+        alert(`Thanks for your suggestion: "${suggestion}"!`);
+        document.getElementById('gameSuggestion').value = '';
+      }
     }
+
+    // Rocket button click effect
+    document.getElementById('rocketButton').addEventListener('click', () => {
+      const rocket = document.getElementById('rocketPopup');
+      rocket.style.opacity = '1';
+      rocket.style.bottom = '50%';
+      setTimeout(() => {
+        rocket.style.opacity = '0';
+        rocket.style.bottom = '-100px';
+      }, 1500);
+    });
   </script>
 </body>
 </html>
