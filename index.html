@@ -182,6 +182,45 @@
       line-height: 1.5;
     }
 
+    /* Downloads Section */
+    .downloads {
+      margin-top: 40px;
+      display: flex;
+      gap: 25px;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 900px;
+    }
+
+    .download-btn {
+      flex: 1 1 200px;
+      padding: 18px 28px;
+      font-size: 20px;
+      background: linear-gradient(45deg, #00ffff, #0099cc);
+      border-radius: 16px;
+      color: #000;
+      font-weight: 900;
+      font-family: 'Orbitron', monospace;
+      text-align: center;
+      cursor: pointer;
+      box-shadow:
+        0 0 18px #00ffff,
+        0 0 40px #00ffff;
+      transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+      user-select: none;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .download-btn:hover {
+      background: linear-gradient(45deg, #00ffff, #00ffffcc);
+      box-shadow:
+        0 0 30px #00ffff,
+        0 0 60px #00ffff;
+      transform: scale(1.05);
+      color: #000;
+    }
+
     /* Responsive tweaks */
     @media (max-width: 600px) {
       h1 {
@@ -190,6 +229,11 @@
 
       #countdown {
         font-size: 32px;
+      }
+
+      .downloads {
+        flex-direction: column;
+        gap: 20px;
       }
     }
   </style>
@@ -209,6 +253,13 @@
 
     <a href="https://tlauncher.org/en/" onclick="playClick()" target="_blank" rel="noopener noreferrer">Download TLauncher</a>
     <a href="https://youtube.com/@layavanger_1?si=2_4KTvuQVhIQm9xg" onclick="playClick()" target="_blank" rel="noopener noreferrer">Visit My YouTube Channel</a>
+
+    <!-- New Downloads Section -->
+    <div class="downloads" aria-label="Game Downloads">
+      <a href="https://www.callofduty.com/warzone" target="_blank" rel="noopener noreferrer" class="download-btn" onclick="playClick()">Download Warzone</a>
+      <a href="https://blog.counter-strike.net/" target="_blank" rel="noopener noreferrer" class="download-btn" onclick="playClick()">Download Counter-Strike 2</a>
+      <a href="https://www.rocketleague.com/download" target="_blank" rel="noopener noreferrer" class="download-btn" onclick="playClick()">Download Rocket League</a>
+    </div>
 
     <p class="note">⚠️ TLauncher is unofficial Minecraft software. Use at your own risk.</p>
   </div>
@@ -233,84 +284,4 @@
         shape: { type: "circle" },
         opacity: { value: 0.5 },
         size: { value: 3 },
-        line_linked: {
-          enable: true,
-          distance: 150,
-          color: "#00ffff",
-          opacity: 0.4,
-          width: 1
-        },
-        move: { enable: true, speed: 2 }
-      },
-      interactivity: {
-        events: {
-          onhover: { enable: true, mode: "repulse" },
-          onclick: { enable: true, mode: "push" }
-        }
-      },
-      retina_detect: true
-    });
-
-    function toggleMode() {
-      document.body.classList.toggle("light-mode");
-    }
-
-    function playClick() {
-      const audio = document.getElementById("clickSound");
-      audio.currentTime = 0;
-      audio.play();
-    }
-
-    function switchTab(id) {
-      document.querySelectorAll('.container').forEach(c => {
-        c.classList.remove('active');
-        c.setAttribute('aria-hidden', 'true');
-      });
-
-      document.querySelectorAll('.tab-button').forEach(btn => {
-        btn.setAttribute('aria-selected', 'false');
-      });
-
-      const activeTab = document.getElementById(id);
-      activeTab.classList.add('active');
-      activeTab.removeAttribute('aria-hidden');
-
-      if(id === 'main') {
-        document.getElementById('tab-home').setAttribute('aria-selected', 'true');
-      } else if (id === 'gta') {
-        document.getElementById('tab-gta').setAttribute('aria-selected', 'true');
-      }
-    }
-
-    // Countdown Logic
-    const countdown = document.getElementById("countdown");
-    const gtaRelease = new Date("2025-10-01T00:00:00").getTime();
-    setInterval(() => {
-      const now = new Date().getTime();
-      const distance = gtaRelease - now;
-
-      if (distance <= 0) {
-        countdown.innerHTML = "🎉 GTA 6 is out!";
-        return;
-      }
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      countdown.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-    }, 1000);
-
-    // Easter egg on heading click
-    const heading = document.getElementById('main-heading');
-    heading.addEventListener('click', () => {
-      heading.style.transition = 'transform 0.6s ease';
-      heading.style.transform = 'rotateY(360deg)';
-      setTimeout(() => {
-        heading.style.transform = '';
-      }, 600);
-    });
-  </script>
-</body>
-</html>
+        line_linked:
