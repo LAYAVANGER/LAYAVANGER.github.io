@@ -13,13 +13,6 @@
       --button-text: #000000;
     }
 
-    body.light-mode {
-      --bg-color: #ffffff;
-      --text-color: #000000;
-      --button-bg: #000000;
-      --button-text: #ffffff;
-    }
-
     body {
       margin: 0;
       padding: 0;
@@ -36,6 +29,17 @@
       width: 100%;
       height: 100%;
       z-index: -1;
+    }
+
+    #pageContent {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1.2s ease, transform 1.2s ease;
+    }
+
+    #pageContent.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .container {
@@ -112,80 +116,69 @@
         font-size: 22px;
       }
     }
-
-    /* Rocket popup style */
-    #rocketPopup {
-      position: fixed;
-      bottom: -100px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 48px;
-      opacity: 0;
-      transition: bottom 1.5s ease-out, opacity 1.5s ease-out;
-      pointer-events: none;
-      z-index: 9999;
-    }
   </style>
 </head>
 <body>
   <div id="particles-js"></div>
 
-  <div class="tabs">
-    <button class="tab-button" onclick="switchTab('main'); playClick()">🏠 Home</button>
-    <button class="tab-button" onclick="switchTab('gta'); playClick()">🎮 GTA 6 Countdown</button>
-    <button class="tab-button" onclick="switchTab('downloads'); playClick()">📥 Game Downloads</button>
-    <button class="tab-button" onclick="switchTab('suggest'); playClick()">🗳️ Suggest a Game</button>
-    <button class="tab-button" onclick="switchTab('support'); playClick()">🛠️ Support</button>
-    <button class="tab-button" id="rocketButton" title="Click me for a surprise!">🚀</button>
-    <button class="tab-button" onclick="toggleMode(); playClick()">🌓 Toggle Mode</button>
-  </div>
+  <div id="pageContent">
+    <div class="tabs">
+      <button class="tab-button" onclick="switchTab('main'); playClick()">🏠 Home</button>
+      <button class="tab-button" onclick="switchTab('gta'); playClick()">🎮 GTA 6 Countdown</button>
+      <button class="tab-button" onclick="switchTab('downloads'); playClick()">📥 Game Downloads</button>
+      <button class="tab-button" onclick="switchTab('suggest'); playClick()">🗳️ Suggest a Game</button>
+      <button class="tab-button" onclick="switchTab('support'); playClick()">🛠️ Support</button>
+    </div>
 
-  <!-- Home -->
-  <div id="main" class="container active">
-    <h1>🚀 Welcome to Layavanger Hub</h1>
-    <a href="https://tlauncher.org/en/" target="_blank">Download TLauncher</a>
-    <a href="https://youtube.com/@layavanger_1" target="_blank">Visit My YouTube Channel</a>
-    <p class="note">⚠️ TLauncher is unofficial Minecraft software. Use at your own risk.</p>
-  </div>
+    <!-- Home -->
+    <div id="main" class="container active">
+      <h1>🚀 Welcome to Layavanger Hub</h1>
+      <a href="https://tlauncher.org/en/" target="_blank">Download TLauncher</a>
+      <a href="https://youtube.com/@layavanger_1" target="_blank">Visit My YouTube Channel</a>
+      <p class="note">⚠️ TLauncher is unofficial Minecraft software. Use at your own risk.</p>
+    </div>
 
-  <!-- GTA Countdown -->
-  <div id="gta" class="container">
-    <h1>🎮 GTA 6 Countdown</h1>
-    <div id="countdown">Loading...</div>
-    <p class="note">Expected release: October 1, 2025</p>
-  </div>
+    <!-- GTA Countdown -->
+    <div id="gta" class="container">
+      <h1>🎮 GTA 6 Countdown</h1>
+      <div id="countdown">Loading...</div>
+      <p class="note">Expected release: October 1, 2025</p>
+    </div>
 
-  <!-- Game Downloads -->
-  <div id="downloads" class="container">
-    <h1>📥 Game Download Links</h1>
-    <a href="https://www.callofduty.com/warzone" target="_blank">Download Warzone</a>
-    <a href="https://store.steampowered.com/app/730/CounterStrike_2/" target="_blank">Download Counter-Strike 2</a>
-  </div>
+    <!-- Game Downloads -->
+    <div id="downloads" class="container">
+      <h1>📥 Game Download Links</h1>
+      <a href="https://www.callofduty.com/warzone" target="_blank">Download Warzone</a>
+      <a href="https://store.steampowered.com/app/730/CounterStrike_2/" target="_blank">Download Counter-Strike 2</a>
+    </div>
 
-  <!-- Suggest a Game -->
-  <div id="suggest" class="container">
-    <h1>🗳️ Suggest the Next Game</h1>
-    <form onsubmit="handleSuggestion(event)">
-      <input type="text" id="gameSuggestion" placeholder="Your game suggestion..." required />
-      <button type="submit">Send</button>
-    </form>
-  </div>
+    <!-- Suggest a Game -->
+    <div id="suggest" class="container">
+      <h1>🗳️ Suggest the Next Game</h1>
+      <form onsubmit="handleSuggestion(event)">
+        <input type="text" id="gameSuggestion" placeholder="Your game suggestion..." required />
+        <button type="submit">Send</button>
+      </form>
+    </div>
 
-  <!-- Support -->
-  <div id="support" class="container">
-    <h1>🛠️ Support Center</h1>
-    <p>If you have any issues, please send an email to:</p>
-    <a href="mailto:layavanger@gmail.com">layavanger@gmail.com</a>
+    <!-- Support -->
+    <div id="support" class="container">
+      <h1>🛠️ Support Center</h1>
+      <p>If you have any issues, please send an email to:</p>
+      <a href="mailto:layavanger@gmail.com">layavanger@gmail.com</a>
+    </div>
   </div>
-
-  <!-- Rocket popup -->
-  <div id="rocketPopup">🚀</div>
 
   <!-- Sound -->
   <audio id="clickSound" src="https://assets.mixkit.co/sfx/preview/mixkit-video-game-mystery-alert-234.wav"></audio>
 
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script>
+    // Fade-in on page load
+    window.addEventListener('load', () => {
+      document.getElementById('pageContent').classList.add('visible');
+    });
+
     // Particles
     particlesJS("particles-js", {
       particles: {
@@ -216,11 +209,6 @@
     function switchTab(id) {
       document.querySelectorAll('.container').forEach(c => c.classList.remove('active'));
       document.getElementById(id).classList.add('active');
-    }
-
-    // Toggle light/dark mode
-    function toggleMode() {
-      document.body.classList.toggle("light-mode");
     }
 
     // Click sound
@@ -256,17 +244,6 @@
         document.getElementById('gameSuggestion').value = '';
       }
     }
-
-    // Rocket button click effect
-    document.getElementById('rocketButton').addEventListener('click', () => {
-      const rocket = document.getElementById('rocketPopup');
-      rocket.style.opacity = '1';
-      rocket.style.bottom = '50%';
-      setTimeout(() => {
-        rocket.style.opacity = '0';
-        rocket.style.bottom = '-100px';
-      }, 1500);
-    });
   </script>
 </body>
 </html>
