@@ -4,17 +4,34 @@
   <meta charset="UTF-8">
   <title>My Launcher Hub</title>
   <style>
-    body {
-      background-color: #1e1e1e;
-      color: #ffffff;
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
       font-family: Arial, sans-serif;
-      text-align: center;
-      padding-top: 100px;
+      overflow: hidden;
     }
+
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: #0f0f0f;
+      z-index: -1;
+    }
+
+    .content {
+      position: relative;
+      text-align: center;
+      color: #ffffff;
+      top: 20%;
+    }
+
     h1 {
       color: #00ffff;
       margin-bottom: 40px;
     }
+
     a {
       display: inline-block;
       margin: 20px;
@@ -25,19 +42,47 @@
       border-radius: 8px;
       text-decoration: none;
     }
+
     a:hover {
       background-color: #00cccc;
+    }
+
+    .note {
+      margin-top: 60px;
+      font-size: 14px;
+      color: #aaa;
     }
   </style>
 </head>
 <body>
-  <h1>🚀 Welcome to My Launcher Hub</h1>
+  <div id="particles-js"></div>
 
-  <a href="https://tlauncher.org/en/" target="_blank">Download TLauncher</a>
-<a href="https://youtube.com/@layavanger_1?si=2_4KTvuQVhIQm9xg" target="_blank">Visit My YouTube Channel</a>
+  <div class="content">
+    <h1>🚀 Welcome to My Launcher Hub</h1>
 
-  <p style="margin-top: 60px; color: #aaa; font-size: 14px;">
-    ⚠️ Note: TLauncher is unofficial Minecraft software. Use at your own risk.
-  </p>
-</body>
-</html>
+    <a href="https://tlauncher.org/en/" target="_blank">Download TLauncher</a>
+    <a href="https://youtube.com/@layavanger_1?si=2_4KTvuQVhIQm9xg" target="_blank">Visit My YouTube Channel</a>
+
+    <p class="note">
+      ⚠️ Note: TLauncher is unofficial Minecraft software. Use at your own risk.
+    </p>
+  </div>
+
+  <!-- particles.js library -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script>
+    particlesJS("particles-js", {
+      "particles": {
+        "number": { "value": 80 },
+        "color": { "value": "#00ffff" },
+        "shape": { "type": "circle" },
+        "opacity": { "value": 0.5 },
+        "size": { "value": 3 },
+        "line_linked": {
+          "enable": true,
+          "distance": 150,
+          "color": "#00ffff",
+          "opacity": 0.4,
+          "width": 1
+        },
+        "move": { "enable": true, "speed": 2
