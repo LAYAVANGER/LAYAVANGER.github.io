@@ -20,7 +20,8 @@
       background-color: var(--bg-color);
       color: var(--text-color);
       transition: all 0.3s ease;
-      cursor: url('https://cur.cursors-4u.net/games/gam-10/gam954.cur'), auto;
+      cursor: url('https://cdn-icons-png.flaticon.com/512/32/32441.png') 16 16, auto;
+      /* custom pixel pointer with hotspot at center (16 16) */
     }
 
     #particles-js {
@@ -176,12 +177,10 @@
 
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script>
-    // Fade-in on page load
     window.addEventListener('load', () => {
       document.getElementById('pageContent').classList.add('visible');
     });
 
-    // Particles
     particlesJS("particles-js", {
       particles: {
         number: { value: 60 },
@@ -207,20 +206,17 @@
       retina_detect: true
     });
 
-    // Tabs switch
     function switchTab(id) {
       document.querySelectorAll('.container').forEach(c => c.classList.remove('active'));
       document.getElementById(id).classList.add('active');
     }
 
-    // Click sound
     function playClick() {
       const audio = document.getElementById("clickSound");
       audio.currentTime = 0;
       audio.play();
     }
 
-    // Countdown timer
     const countdown = document.getElementById("countdown");
     const gtaRelease = new Date("2025-10-01T00:00:00").getTime();
     setInterval(() => {
@@ -237,7 +233,6 @@
       countdown.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
     }, 1000);
 
-    // Suggestion form (just clears input and alerts)
     function handleSuggestion(event) {
       event.preventDefault();
       const suggestion = document.getElementById('gameSuggestion').value.trim();
