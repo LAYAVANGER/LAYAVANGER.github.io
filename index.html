@@ -2,15 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Layavanger Hub</title>
   <style>
     :root {
       --bg-color: #0f0f0f;
       --text-color: #ffffff;
-      --accent: #00ffff;
-      --button-bg: #00ffff;
+      --accent: #00cccc;
+      --button-bg: #00cccc;
       --button-text: #000000;
+    }
+
+    body.light-mode {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --button-bg: #000000;
+      --button-text: #ffffff;
     }
 
     body {
@@ -20,8 +27,18 @@
       background-color: var(--bg-color);
       color: var(--text-color);
       transition: all 0.3s ease;
-      cursor: url('https://cdn-icons-png.flaticon.com/512/32/32441.png') 16 16, auto;
-      /* custom pixel pointer with hotspot at center (16 16) */
+      cursor: url('https://cdn-icons-png.flaticon.com/512/32/32195.png'), auto; /* Custom cursor */
+    }
+
+    /* Page content animation */
+    #pageContent {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1.2s ease, transform 1.2s ease;
+    }
+    #pageContent.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     #particles-js {
@@ -32,15 +49,28 @@
       z-index: -1;
     }
 
-    #pageContent {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 1.2s ease, transform 1.2s ease;
+    .tabs {
+      text-align: center;
+      padding: 20px 0 10px;
     }
 
-    #pageContent.visible {
-      opacity: 1;
-      transform: translateY(0);
+    .tab-button {
+      display: inline-block;
+      margin: 0 10px;
+      padding: 12px 24px;
+      font-size: 18px;
+      background-color: var(--button-bg);
+      color: var(--button-text);
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+    .tab-button:hover {
+      background-color: var(--accent);
+      color: var(--button-text);
     }
 
     .container {
@@ -48,73 +78,110 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 80px 20px;
-      min-height: 100vh;
+      padding: 80px 20px 40px;
+      min-height: 75vh;
       text-align: center;
+      max-width: 900px;
+      margin: 0 auto 40px;
     }
-
     .container.active {
       display: flex;
     }
 
     h1 {
       color: var(--accent);
-      margin: 20px 0 40px;
+      margin-bottom: 30px;
+      font-weight: 700;
     }
 
-    a, button, .tab-button {
+    a.download-btn {
       display: inline-block;
-      margin: 10px;
-      padding: 12px 20px;
-      font-size: 16px;
+      margin: 15px;
+      padding: 14px 28px;
+      font-size: 18px;
       background-color: var(--button-bg);
       color: var(--button-text);
-      border: none;
-      border-radius: 10px;
+      border-radius: 12px;
       text-decoration: none;
-      cursor: pointer;
-      transition: 0.3s ease;
+      font-weight: 600;
+      box-shadow: 0 0 10px var(--accent);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
     }
-
-    a:hover, button:hover, .tab-button:hover {
-      background-color: #00cccc;
+    a.download-btn:hover {
+      background-color: var(--accent);
+      box-shadow: 0 0 20px var(--accent);
+      color: var(--button-text);
     }
 
     .note {
-      margin-top: 30px;
+      margin-top: 40px;
       font-size: 14px;
       color: #aaa;
-    }
-
-    .tabs {
-      text-align: center;
-      padding-top: 20px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     #countdown {
-      font-size: 24px;
+      font-size: 28px;
       margin-top: 20px;
       color: var(--accent);
+      font-weight: 700;
     }
 
+    /* Support form */
     form {
-      margin-top: 20px;
-      width: 300px;
-      max-width: 90%;
+      margin-top: 30px;
+      max-width: 600px;
+      width: 100%;
+      text-align: left;
     }
-
-    input, textarea {
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--accent);
+    }
+    input[type="email"],
+    textarea {
+      width: 100%;
       padding: 10px;
       border-radius: 8px;
       border: none;
-      width: 100%;
-      margin-top: 10px;
+      margin-bottom: 20px;
+      resize: vertical;
       font-size: 16px;
+      font-family: inherit;
+    }
+    button.submit-btn {
+      background-color: var(--button-bg);
+      color: var(--button-text);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 700;
+      box-shadow: 0 0 10px var(--accent);
+      transition: background-color 0.3s ease;
+    }
+    button.submit-btn:hover {
+      background-color: var(--accent);
+      box-shadow: 0 0 20px var(--accent);
+      color: var(--button-text);
     }
 
+    /* Responsive */
     @media (max-width: 600px) {
       h1 {
-        font-size: 22px;
+        font-size: 24px;
+      }
+      a.download-btn {
+        font-size: 16px;
+        padding: 12px 20px;
+      }
+      .tab-button {
+        font-size: 16px;
+        padding: 10px 18px;
       }
     }
   </style>
@@ -122,77 +189,66 @@
 <body>
   <div id="particles-js"></div>
 
-  <div id="pageContent">
-    <div class="tabs">
-      <button class="tab-button" onclick="switchTab('main'); playClick()">🏠 Home</button>
-      <button class="tab-button" onclick="switchTab('gta'); playClick()">🎮 GTA 6 Countdown</button>
-      <button class="tab-button" onclick="switchTab('downloads'); playClick()">📥 Game Downloads</button>
-      <button class="tab-button" onclick="switchTab('suggest'); playClick()">🗳️ Suggest a Game</button>
-      <button class="tab-button" onclick="switchTab('support'); playClick()">🛠️ Support</button>
-    </div>
+  <div class="tabs">
+    <button class="tab-button" onclick="switchTab('main'); playClick()">🏠 Home</button>
+    <button class="tab-button" onclick="switchTab('games'); playClick()">🎮 Games</button>
+    <button class="tab-button" onclick="switchTab('support'); playClick()">🛠️ Support</button>
+  </div>
 
-    <!-- Home -->
+  <div id="pageContent">
+    <!-- Home Tab -->
     <div id="main" class="container active">
       <h1>🚀 Welcome to Layavanger Hub</h1>
-      <a href="https://tlauncher.org/en/" target="_blank">Download TLauncher</a>
-      <a href="https://youtube.com/@layavanger_1" target="_blank">Visit My YouTube Channel</a>
-      <p class="note">⚠️ TLauncher is unofficial Minecraft software. Use at your own risk.</p>
+      <p>Discover downloads and info for your favorite games!</p>
+      <p class="note">⚠️ Remember to always download games from official and trusted sources.</p>
     </div>
 
-    <!-- GTA Countdown -->
-    <div id="gta" class="container">
-      <h1>🎮 GTA 6 Countdown</h1>
-      <div id="countdown">Loading...</div>
-      <p class="note">Expected release: October 1, 2025</p>
+    <!-- Games Tab -->
+    <div id="games" class="container">
+      <h1>🔥 Download Your Game</h1>
+      <a href="https://www.ea.com/games/warzone/warzone" target="_blank" class="download-btn" onclick="playClick()">Download Warzone</a>
+      <a href="https://store.steampowered.com/app/730/CounterStrike_Global_Offensive/" target="_blank" class="download-btn" onclick="playClick()">Download Counter-Strike 2</a>
+      <a href="https://playvalorant.com/" target="_blank" class="download-btn" onclick="playClick()">Download Valorant</a>
+      <a href="https://www.epicgames.com/fortnite/en-US/download" target="_blank" class="download-btn" onclick="playClick()">Download Fortnite</a>
+
+      <p class="note">Click any button above to visit the official download page.</p>
     </div>
 
-    <!-- Game Downloads -->
-    <div id="downloads" class="container">
-      <h1>📥 Game Download Links</h1>
-      <a href="https://www.callofduty.com/warzone" target="_blank">Download Warzone</a>
-      <a href="https://store.steampowered.com/app/730/CounterStrike_2/" target="_blank">Download Counter-Strike 2</a>
-      <a href="https://playvalorant.com/en-us/download/" target="_blank">Download Valorant</a>
-      <a href="https://www.epicgames.com/fortnite/en-US/download" target="_blank">Download Fortnite</a>
-    </div>
-
-    <!-- Suggest a Game -->
-    <div id="suggest" class="container">
-      <h1>🗳️ Suggest the Next Game</h1>
-      <form onsubmit="handleSuggestion(event)">
-        <input type="text" id="gameSuggestion" placeholder="Your game suggestion..." required />
-        <button type="submit">Send</button>
-      </form>
-    </div>
-
-    <!-- Support -->
+    <!-- Support Tab -->
     <div id="support" class="container">
       <h1>🛠️ Support Center</h1>
-      <p>If you have any issues, please send an email to:</p>
-      <a href="mailto:layavanger@gmail.com">layavanger@gmail.com</a>
+      <p>Having issues or complaints? Contact us below:</p>
+      <form id="supportForm">
+        <label for="email">Your Email:</label>
+        <input type="email" id="email" name="email" required placeholder="you@example.com" />
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="5" required placeholder="Describe your issue or complaint here"></textarea>
+
+        <button type="submit" class="submit-btn">Send Complaint</button>
+      </form>
+      <p id="formStatus" class="note"></p>
     </div>
   </div>
 
-  <!-- Sound -->
+  <!-- Click sound -->
   <audio id="clickSound" src="https://assets.mixkit.co/sfx/preview/mixkit-video-game-mystery-alert-234.wav"></audio>
 
+  <!-- Particles.js -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script>
-    window.addEventListener('load', () => {
-      document.getElementById('pageContent').classList.add('visible');
-    });
-
     particlesJS("particles-js", {
       particles: {
-        number: { value: 60 },
-        color: { value: "#00ffff" },
+        number: { value: 50 },
+        color: { value: "#00cccc" },
         shape: { type: "circle" },
-        opacity: { value: 0.3 },
+        opacity: { value: 0.4 },
         size: { value: 3 },
         line_linked: {
           enable: true,
           distance: 120,
-          color: "#00ffff",
-          opacity: 0.2,
+          color: "#00cccc",
+          opacity: 0.3,
           width: 1
         },
         move: { enable: true, speed: 1.5 }
@@ -206,41 +262,43 @@
       retina_detect: true
     });
 
-    function switchTab(id) {
-      document.querySelectorAll('.container').forEach(c => c.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-    }
-
     function playClick() {
       const audio = document.getElementById("clickSound");
       audio.currentTime = 0;
       audio.play();
     }
 
-    const countdown = document.getElementById("countdown");
-    const gtaRelease = new Date("2025-10-01T00:00:00").getTime();
-    setInterval(() => {
-      const now = new Date().getTime();
-      const distance = gtaRelease - now;
-      if (distance <= 0) {
-        countdown.innerHTML = "🎉 GTA 6 is out!";
+    function switchTab(id) {
+      document.querySelectorAll('.container').forEach(c => c.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    // Entry animation triggers every load
+    window.addEventListener('load', () => {
+      document.getElementById('pageContent').classList.add('visible');
+    });
+
+    // Support form submission
+    document.getElementById('supportForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = this.email.value.trim();
+      const message = this.message.value.trim();
+      const status = document.getElementById('formStatus');
+
+      if(!email || !message) {
+        status.textContent = "Please fill out all fields.";
+        status.style.color = "red";
         return;
       }
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      countdown.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-    }, 1000);
 
-    function handleSuggestion(event) {
-      event.preventDefault();
-      const suggestion = document.getElementById('gameSuggestion').value.trim();
-      if (suggestion) {
-        alert(`Thanks for your suggestion: "${suggestion}"!`);
-        document.getElementById('gameSuggestion').value = '';
-      }
-    }
+      // For demonstration, we simulate sending email.
+      // Replace this with your backend email sending logic or API.
+
+      status.style.color = "lime";
+      status.textContent = "Thank you! Your complaint has been sent to layavanger@gmail.com";
+
+      this.reset();
+    });
   </script>
 </body>
 </html>
