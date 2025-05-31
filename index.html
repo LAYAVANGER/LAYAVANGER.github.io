@@ -38,7 +38,7 @@
     }
 
     .container {
-      display: flex;
+      display: none;
       flex-direction: column;
       align-items: center;
       justify-content: center;
@@ -47,12 +47,16 @@
       text-align: center;
     }
 
+    .container.active {
+      display: flex;
+    }
+
     h1 {
       color: var(--accent);
       margin-bottom: 40px;
     }
 
-    a, button.toggle-mode {
+    a, button, .tab-button {
       display: inline-block;
       margin: 15px;
       padding: 14px 24px;
@@ -66,7 +70,7 @@
       transition: background-color 0.3s ease;
     }
 
-    a:hover, button.toggle-mode:hover {
+    a:hover, button:hover, .tab-button:hover {
       background-color: var(--accent);
       color: var(--button-text);
     }
@@ -77,39 +81,58 @@
       color: #aaa;
     }
 
+    .tabs {
+      text-align: center;
+      padding-top: 20px;
+    }
+
     @media (max-width: 600px) {
       h1 {
         font-size: 24px;
       }
-      a, button.toggle-mode {
+      a, button, .tab-button {
         font-size: 16px;
         padding: 12px 20px;
       }
+    }
+
+    #countdown {
+      font-size: 28px;
+      margin-top: 20px;
+      color: var(--accent);
     }
   </style>
 </head>
 <body>
   <div id="particles-js"></div>
 
-  <div class="container">
-    <h1>🚀 Welcome to My Launcher Hub</h1>
-
-    <a href="https://tlauncher.org/en/" onclick="playClick()" target="_blank">Download TLauncher</a>
-    <a href="https://youtube.com/@layavanger_1?si=2_4KTvuQVhIQm9xg" onclick="playClick()" target="_blank">Visit My YouTube Channel</a>
-    <button class="toggle-mode" onclick="toggleMode(); playClick()">Toggle Dark/Light Mode</button>
-
-    <p class="note">
-      ⚠️ Note: TLauncher is unofficial Minecraft software. Use at your own risk.
-    </p>
+  <div class="tabs">
+    <button class="tab-button" onclick="switchTab('main'); playClick()">🏠 Home</button>
+    <button class="tab-button" onclick="switchTab('gta'); playClick()">🎮 GTA 6 Countdown</button>
+    <button class="tab-button" onclick="toggleMode(); playClick()">🌓 Toggle Mode</button>
   </div>
 
-  <!-- Sound effect -->
+  <!-- Home Tab -->
+  <div id="main" class="container active">
+    <h1>🚀 Welcome to My Launcher Hub</h1>
+    <a href="https://tlauncher.org/en/" onclick="playClick()" target="_blank">Download TLauncher</a>
+    <a href="https://youtube.com/@layavanger_1?si=2_4KTvuQVhIQm9xg" onclick="playClick()" target="_blank">Visit My YouTube Channel</a>
+    <p class="note">⚠️ TLauncher is unofficial Minecraft software. Use at your own risk.</p>
+  </div>
+
+  <!-- GTA 6 Countdown Tab -->
+  <div id="gta" class="container">
+    <h1>🎮 Countdown to GTA 6 Release</h1>
+    <div id="countdown">Loading...</div>
+    <p class="note">Expected release: October 1, 2025</p>
+  </div>
+
+  <!-- Click sound -->
   <audio id="clickSound" src="https://assets.mixkit.co/sfx/preview/mixkit-video-game-mystery-alert-234.wav"></audio>
 
-  <!-- particles.js library -->
+  <!-- Particles -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script>
-    // Particle background
     particlesJS("particles-js", {
       particles: {
         number: { value: 70 },
@@ -135,17 +158,40 @@
       retina_detect: true
     });
 
-    // Mode toggle
     function toggleMode() {
       document.body.classList.toggle("light-mode");
     }
 
-    // Sound on click
     function playClick() {
       const audio = document.getElementById("clickSound");
       audio.currentTime = 0;
       audio.play();
     }
+
+    function switchTab(id) {
+      document.querySelectorAll('.container').forEach(c => c.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    // Countdown Logic
+    const countdown = document.getElementById("countdown");
+    const gtaRelease = new Date("2025-10-01T00:00:00").getTime();
+    setInterval(() => {
+      const now = new Date().getTime();
+      const distance = gtaRelease - now;
+
+      if (distance <= 0) {
+        countdown.innerHTML = "🎉 GTA 6 is out!";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdown.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }, 1000);
   </script>
 </body>
 </html>
