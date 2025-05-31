@@ -27,6 +27,7 @@
       background-color: var(--bg-color);
       color: var(--text-color);
       transition: all 0.3s ease;
+      cursor: url('https://cur.cursors-4u.net/games/gam-10/gam954.cur'), auto;
     }
 
     #particles-js {
@@ -56,31 +57,28 @@
       margin: 20px 0 40px;
     }
 
-    a, button, .tab-button, input[type="submit"] {
+    a, button, .tab-button {
       display: inline-block;
-      margin: 15px;
-      padding: 14px 24px;
-      font-size: 18px;
+      margin: 10px;
+      padding: 12px 20px;
+      font-size: 16px;
       background-color: var(--button-bg);
       color: var(--button-text);
       border: none;
       border-radius: 10px;
       text-decoration: none;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: 0.3s ease;
     }
 
-    a:hover, button:hover, .tab-button:hover, input[type="submit"]:hover {
-      background-color: var(--accent);
-      color: var(--button-text);
+    a:hover, button:hover, .tab-button:hover {
+      background-color: #00cccc;
     }
 
-    input, textarea {
-      width: 300px;
-      padding: 10px;
-      margin: 10px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
+    .note {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #aaa;
     }
 
     .tabs {
@@ -88,16 +86,35 @@
       padding-top: 20px;
     }
 
+    .logo {
+      width: 100px;
+      border-radius: 50%;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
     #countdown {
-      font-size: 28px;
+      font-size: 24px;
       margin-top: 20px;
       color: var(--accent);
     }
 
-    .note {
-      font-size: 14px;
-      color: #aaa;
-      margin-top: 30px;
+    form {
+      margin-top: 20px;
+    }
+
+    input, textarea {
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 22px;
+      }
     }
   </style>
 </head>
@@ -107,69 +124,77 @@
   <div class="tabs">
     <button class="tab-button" onclick="switchTab('main'); playClick()">🏠 Home</button>
     <button class="tab-button" onclick="switchTab('gta'); playClick()">🎮 GTA 6 Countdown</button>
-    <button class="tab-button" onclick="switchTab('downloads'); playClick()">⬇️ Downloads</button>
-    <button class="tab-button" onclick="switchTab('support'); playClick()">🛠 Support</button>
+    <button class="tab-button" onclick="switchTab('downloads'); playClick()">📥 Game Downloads</button>
+    <button class="tab-button" onclick="switchTab('suggest'); playClick()">🗳️ Suggest a Game</button>
+    <button class="tab-button" onclick="switchTab('support'); playClick()">🛠️ Support</button>
     <button class="tab-button" onclick="toggleMode(); playClick()">🌓 Toggle Mode</button>
   </div>
 
+  <!-- Home -->
   <div id="main" class="container active">
+    <img src="channels4_profile.jpg" alt="Layavanger Logo" class="logo" onclick="triggerEasterEgg()" />
     <h1>🚀 Welcome to Layavanger Hub</h1>
-    <a href="https://tlauncher.org/en/" onclick="playClick()" target="_blank">Download TLauncher</a>
-    <a href="https://youtube.com/@layavanger_1" onclick="playClick()" target="_blank">Visit My YouTube Channel</a>
+    <a href="https://tlauncher.org/en/" target="_blank">Download TLauncher</a>
+    <a href="https://youtube.com/@layavanger_1" target="_blank">Visit My YouTube Channel</a>
     <p class="note">⚠️ TLauncher is unofficial Minecraft software. Use at your own risk.</p>
   </div>
 
+  <!-- GTA Countdown -->
   <div id="gta" class="container">
-    <h1>🎮 Countdown to GTA 6 Release</h1>
+    <h1>🎮 GTA 6 Countdown</h1>
     <div id="countdown">Loading...</div>
     <p class="note">Expected release: October 1, 2025</p>
   </div>
 
+  <!-- Game Downloads -->
   <div id="downloads" class="container">
-    <h1>🎮 Game Downloads</h1>
+    <h1>📥 Game Download Links</h1>
     <a href="https://www.callofduty.com/warzone" target="_blank">Download Warzone</a>
     <a href="https://store.steampowered.com/app/730/CounterStrike_2/" target="_blank">Download Counter-Strike 2</a>
-    <h2 style="margin-top: 40px">🗳️ Vote for the Next Game</h2>
-    <form id="gamePoll" onsubmit="submitPoll(event)">
-      <label>Which game should we add next?</label><br>
-      <input type="radio" name="nextGame" value="Fortnite" required /> Fortnite<br>
-      <input type="radio" name="nextGame" value="Valorant" /> Valorant<br>
-      <input type="radio" name="nextGame" value="PUBG" /> PUBG<br>
-      <br>
-      <input type="submit" value="Vote" />
-    </form>
-    <p id="pollResult" class="note"></p>
   </div>
 
+  <!-- Suggest a Game -->
+  <div id="suggest" class="container">
+    <h1>🗳️ Suggest the Next Game</h1>
+    <form onsubmit="alert('Thanks for your suggestion!'); return false;">
+      <input type="text" placeholder="Your game suggestion..." required />
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
+  <!-- Support -->
   <div id="support" class="container">
-    <h1>🛠 Support Center</h1>
-    <form onsubmit="sendComplaint(event)">
-      <input type="text" id="name" placeholder="Your Name" required /><br>
-      <input type="email" id="email" placeholder="Your Email" required /><br>
-      <textarea id="message" placeholder="Your Complaint" rows="5" required></textarea><br>
-      <input type="submit" value="Send Complaint" />
-    </form>
+    <h1>🛠️ Support Center</h1>
+    <p>If you have any issues, please send an email to:</p>
+    <a href="mailto:layavanger@gmail.com">layavanger@gmail.com</a>
   </div>
 
+  <!-- Easter Egg Confetti -->
+  <canvas id="confetti-canvas" style="position:fixed;pointer-events:none;top:0;left:0;width:100%;height:100%;z-index:999;"></canvas>
+
+  <!-- Sound -->
   <audio id="clickSound" src="https://assets.mixkit.co/sfx/preview/mixkit-video-game-mystery-alert-234.wav"></audio>
 
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script>
+    // Particles
     particlesJS("particles-js", {
       particles: {
-        number: { value: 50 },
+        number: { value: 60 },
         color: { value: "#00ffff" },
         shape: { type: "circle" },
         opacity: { value: 0.3 },
         size: { value: 3 },
         line_linked: {
           enable: true,
-          distance: 150,
+          distance: 120,
           color: "#00ffff",
           opacity: 0.2,
           width: 1
         },
-        move: { enable: true, speed: 2 }
+        move: { enable: true, speed: 1.5 }
       },
       interactivity: {
         events: {
@@ -180,66 +205,49 @@
       retina_detect: true
     });
 
+    // Tabs
+    function switchTab(id) {
+      document.querySelectorAll('.container').forEach(c => c.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    // Toggle light/dark mode
     function toggleMode() {
       document.body.classList.toggle("light-mode");
     }
 
+    // Click sound
     function playClick() {
       const audio = document.getElementById("clickSound");
       audio.currentTime = 0;
       audio.play();
     }
 
-    function switchTab(id) {
-      document.querySelectorAll('.container').forEach(c => c.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-    }
-
+    // Countdown
     const countdown = document.getElementById("countdown");
     const gtaRelease = new Date("2025-10-01T00:00:00").getTime();
     setInterval(() => {
       const now = new Date().getTime();
       const distance = gtaRelease - now;
-
       if (distance <= 0) {
         countdown.innerHTML = "🎉 GTA 6 is out!";
         return;
       }
-
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
       const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
       countdown.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
     }, 1000);
 
-    function sendComplaint(event) {
-      event.preventDefault();
-      const name = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const message = document.getElementById("message").value.trim();
-
-      if (!name || !email || !message) {
-        alert("Please fill in all fields.");
-        return false;
-      }
-
-      const mailto = `https://mail.google.com/mail/?view=cm&fs=1&to=layavanger@gmail.com&su=Support%20Request%20from%20${encodeURIComponent(name)}&body=${encodeURIComponent("Name: " + name + "\nEmail: " + email + "\n\nMessage:\n" + message)}`;
-      window.open(mailto, '_blank');
-      return false;
-    }
-
-    function submitPoll(event) {
-      event.preventDefault();
-      const form = document.getElementById("gamePoll");
-      const selected = form.nextGame.value;
-      const result = document.getElementById("pollResult");
-      result.textContent = `Thanks for voting! You chose: ${selected}`;
-      form.reset();
-      return false;
+    // Easter Egg
+    function triggerEasterEgg() {
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
     }
   </script>
 </body>
 </html>
-
