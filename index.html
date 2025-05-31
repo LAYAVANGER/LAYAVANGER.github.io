@@ -2,19 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Layavanger Hub - Gaming Upgraded</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Layavanger Hub</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
-
     :root {
       --bg-color: #0f0f0f;
       --text-color: #ffffff;
       --accent: #00ffff;
       --button-bg: #00ffff;
       --button-text: #000000;
-      --glow-color: #00fff7;
-      --cursor-color: #00ffff;
     }
 
     body.light-mode {
@@ -22,28 +18,16 @@
       --text-color: #000000;
       --button-bg: #000000;
       --button-text: #ffffff;
-      --glow-color: #0077ff;
-      --cursor-color: #0077ff;
     }
 
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(270deg, #001011, #002233, #001011);
-      background-size: 600% 600%;
-      animation: gradientBG 20s ease infinite;
+      font-family: Arial, sans-serif;
+      background-color: var(--bg-color);
       color: var(--text-color);
       transition: all 0.3s ease;
-      cursor: url('data:image/svg+xml;utf8,<svg fill="%2300ffff" height="32" viewBox="0 0 24 24" width="32" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M4 4h16v2H4z"/></svg>') 16 16, auto;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    @keyframes gradientBG {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
+      overflow-x: hidden;
     }
 
     #particles-js {
@@ -52,46 +36,6 @@
       width: 100%;
       height: 100%;
       z-index: -1;
-      pointer-events: none;
-    }
-
-    .tabs {
-      text-align: center;
-      padding-top: 20px;
-      perspective: 800px;
-      user-select: none;
-    }
-
-    .tab-button {
-      display: inline-block;
-      margin: 15px;
-      padding: 14px 26px;
-      font-size: 18px;
-      background-color: var(--button-bg);
-      color: var(--button-text);
-      border: none;
-      border-radius: 14px;
-      text-decoration: none;
-      cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-      box-shadow:
-        0 0 8px var(--glow-color),
-        0 0 15px var(--glow-color);
-      transform-style: preserve-3d;
-      will-change: transform;
-      font-weight: 700;
-      font-family: 'Orbitron', monospace;
-      text-transform: uppercase;
-      letter-spacing: 1.2px;
-    }
-
-    .tab-button:hover {
-      background-color: var(--accent);
-      color: var(--button-text);
-      transform: translateZ(15px) rotateX(8deg) rotateY(5deg);
-      box-shadow:
-        0 0 20px var(--glow-color),
-        0 0 40px var(--glow-color);
     }
 
     .container {
@@ -99,79 +43,39 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 80px 20px;
+      padding: 100px 20px 60px 20px;
       min-height: 100vh;
       text-align: center;
-      opacity: 0;
-      transform-style: preserve-3d;
-      transition: opacity 0.8s ease, transform 0.8s ease;
-      will-change: opacity, transform;
-      color: var(--text-color);
+      max-width: 900px;
+      margin: 0 auto;
     }
 
     .container.active {
       display: flex;
-      opacity: 1;
-      transform: translateZ(0);
     }
 
     h1 {
       color: var(--accent);
-      margin: 0 0 40px;
-      font-size: 3.2em;
-      font-family: 'Orbitron', monospace;
-      text-shadow:
-        0 0 10px var(--glow-color),
-        0 0 20px var(--glow-color),
-        0 0 40px var(--glow-color);
-      user-select: none;
-      cursor: pointer;
-      transition: transform 0.3s ease;
+      margin: 20px 0 40px;
     }
 
-    h1:hover {
-      transform: scale(1.05);
-      text-shadow:
-        0 0 15px var(--glow-color),
-        0 0 30px var(--glow-color),
-        0 0 60px var(--glow-color);
-    }
-
-    #countdown {
-      font-size: 42px;
-      margin-top: 20px;
-      color: var(--accent);
-      font-weight: 900;
-      text-shadow:
-        0 0 10px var(--glow-color),
-        0 0 30px var(--glow-color);
-      user-select: none;
-    }
-
-    a {
+    a, button, .tab-button {
       display: inline-block;
       margin: 15px;
-      padding: 14px 28px;
+      padding: 14px 24px;
       font-size: 18px;
       background-color: var(--button-bg);
       color: var(--button-text);
-      border-radius: 18px;
+      border: none;
+      border-radius: 10px;
       text-decoration: none;
       cursor: pointer;
-      font-weight: 700;
-      font-family: 'Orbitron', monospace;
-      letter-spacing: 1px;
-      box-shadow:
-        0 0 12px var(--glow-color),
-        0 0 24px var(--glow-color);
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      transition: background-color 0.3s ease;
     }
 
-    a:hover {
+    a:hover, button:hover, .tab-button:hover {
       background-color: var(--accent);
-      box-shadow:
-        0 0 30px var(--glow-color),
-        0 0 60px var(--glow-color);
+      color: var(--button-text);
     }
 
     .note {
@@ -179,118 +83,147 @@
       font-size: 14px;
       color: #aaa;
       max-width: 600px;
-      line-height: 1.5;
     }
 
-    /* Downloads Section */
-    .downloads {
-      margin-top: 40px;
-      display: flex;
-      gap: 25px;
-      flex-wrap: wrap;
-      justify-content: center;
-      max-width: 900px;
-    }
-
-    .download-btn {
-      flex: 1 1 200px;
-      padding: 18px 28px;
-      font-size: 20px;
-      background: linear-gradient(45deg, #00ffff, #0099cc);
-      border-radius: 16px;
-      color: #000;
-      font-weight: 900;
-      font-family: 'Orbitron', monospace;
+    .tabs {
       text-align: center;
-      cursor: pointer;
-      box-shadow:
-        0 0 18px #00ffff,
-        0 0 40px #00ffff;
-      transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-      user-select: none;
-      text-decoration: none;
-      display: inline-block;
+      padding-top: 20px;
+      position: sticky;
+      top: 0;
+      background-color: var(--bg-color);
+      z-index: 10;
+      border-bottom: 1px solid var(--accent);
     }
 
-    .download-btn:hover {
-      background: linear-gradient(45deg, #00ffff, #00ffffcc);
-      box-shadow:
-        0 0 30px #00ffff,
-        0 0 60px #00ffff;
-      transform: scale(1.05);
-      color: #000;
-    }
-
-    /* Responsive tweaks */
     @media (max-width: 600px) {
       h1 {
-        font-size: 2.4em;
+        font-size: 24px;
       }
+      a, button, .tab-button {
+        font-size: 16px;
+        padding: 12px 20px;
+      }
+    }
 
-      #countdown {
-        font-size: 32px;
-      }
+    #countdown {
+      font-size: 28px;
+      margin-top: 20px;
+      color: var(--accent);
+    }
 
-      .downloads {
-        flex-direction: column;
-        gap: 20px;
-      }
+    /* Support Form Styles */
+    form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 500px;
+      margin-top: 20px;
+    }
+
+    label {
+      margin: 10px 0 5px;
+      text-align: left;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+      resize: vertical;
+    }
+
+    textarea {
+      min-height: 120px;
+    }
+
+    input[type="submit"] {
+      margin-top: 20px;
+      background-color: var(--accent);
+      color: var(--button-text);
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #00bbbb;
     }
   </style>
 </head>
 <body>
   <div id="particles-js"></div>
 
-  <div class="tabs" role="tablist" aria-label="Main navigation">
-    <button class="tab-button" onclick="switchTab('main'); playClick()" role="tab" aria-selected="true" aria-controls="main" id="tab-home">🏠 Home</button>
-    <button class="tab-button" onclick="switchTab('gta'); playClick()" role="tab" aria-selected="false" aria-controls="gta" id="tab-gta">🎮 GTA 6 Countdown</button>
-    <button class="tab-button" onclick="toggleMode(); playClick()" aria-label="Toggle light/dark mode">🌓 Toggle Mode</button>
+  <div class="tabs">
+    <button class="tab-button" onclick="switchTab('main'); playClick()">🏠 Home</button>
+    <button class="tab-button" onclick="switchTab('gta'); playClick()">🎮 GTA 6 Countdown</button>
+    <button class="tab-button" onclick="switchTab('games'); playClick()">🎮 Downloads</button>
+    <button class="tab-button" onclick="switchTab('support'); playClick()">🛠 Support Center</button>
+    <button class="tab-button" onclick="toggleMode(); playClick()">🌓 Toggle Mode</button>
   </div>
 
   <!-- Home Tab -->
-  <div id="main" class="container active" role="tabpanel" aria-labelledby="tab-home">
-    <h1 id="main-heading">🚀 Welcome to My Launcher Hub</h1>
-
-    <a href="https://tlauncher.org/en/" onclick="playClick()" target="_blank" rel="noopener noreferrer">Download TLauncher</a>
-    <a href="https://youtube.com/@layavanger_1?si=2_4KTvuQVhIQm9xg" onclick="playClick()" target="_blank" rel="noopener noreferrer">Visit My YouTube Channel</a>
-
-    <!-- New Downloads Section -->
-    <div class="downloads" aria-label="Game Downloads">
-      <a href="https://www.callofduty.com/warzone" target="_blank" rel="noopener noreferrer" class="download-btn" onclick="playClick()">Download Warzone</a>
-      <a href="https://blog.counter-strike.net/" target="_blank" rel="noopener noreferrer" class="download-btn" onclick="playClick()">Download Counter-Strike 2</a>
-    </div>
-
+  <div id="main" class="container active">
+    <h1>🚀 Welcome to My Launcher Hub</h1>
+    <a href="https://tlauncher.org/en/" onclick="playClick()" target="_blank">Download TLauncher</a>
+    <a href="https://youtube.com/@layavanger_1?si=2_4KTvuQVhIQm9xg" onclick="playClick()" target="_blank">Visit My YouTube Channel</a>
     <p class="note">⚠️ TLauncher is unofficial Minecraft software. Use at your own risk.</p>
   </div>
 
   <!-- GTA 6 Countdown Tab -->
-  <div id="gta" class="container" role="tabpanel" aria-labelledby="tab-gta">
+  <div id="gta" class="container">
     <h1>🎮 Countdown to GTA 6 Release</h1>
     <div id="countdown">Loading...</div>
     <p class="note">Expected release: October 1, 2025</p>
   </div>
 
-  <!-- Click sound -->
-  <audio id="clickSound" src="https://assets.mixkit.co/sfx/preview/mixkit-video-game-mystery-alert-234.wav" preload="auto"></audio>
+  <!-- Downloads Tab -->
+  <div id="games" class="container">
+    <h1>🎮 Game Downloads</h1>
+    <a href="https://www.activision.com/warzone" target="_blank" onclick="playClick()">Download Warzone</a>
+    <a href="https://blog.counter-strike.net/" target="_blank" onclick="playClick()">Download Counter-Strike 2</a>
+  </div>
 
-  <!-- Particles.js -->
+  <!-- Support Center Tab -->
+  <div id="support" class="container">
+    <h1>🛠 Support Center</h1>
+    <p class="note">If you have any complaints or issues, please fill out the form below. Your message will be sent to <strong>layavanger@gmail.com</strong>.</p>
+    <form id="supportForm" onsubmit="return sendComplaint(event)">
+      <label for="name">Your Name:</label>
+      <input type="text" id="name" name="name" required placeholder="Enter your name" />
+
+      <label for="email">Your Email:</label>
+      <input type="email" id="email" name="email" required placeholder="Enter your email" />
+
+      <label for="message">Complaint / Message:</label>
+      <textarea id="message" name="message" required placeholder="Describe your issue or complaint here"></textarea>
+
+      <input type="submit" value="Send Complaint" />
+    </form>
+  </div>
+
+  <!-- Click sound -->
+  <audio id="clickSound" src="https://assets.mixkit.co/sfx/preview/mixkit-video-game-mystery-alert-234.wav"></audio>
+
+  <!-- Particles -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script>
     particlesJS("particles-js", {
       particles: {
-        number: { value: 70 },
-        color: { value: "#00ffff" },
+        number: { value: 50 },
+        color: { value: "#00cccc" },
         shape: { type: "circle" },
-        opacity: { value: 0.5 },
+        opacity: { value: 0.3 },
         size: { value: 3 },
         line_linked: {
           enable: true,
-          distance: 150,
-          color: "#00ffff",
-          opacity: 0.4,
+          distance: 120,
+          color: "#00cccc",
+          opacity: 0.25,
           width: 1
         },
-        move: { enable: true, speed: 2 }
+        move: { enable: true, speed: 1.5 }
       },
       interactivity: {
         events: {
@@ -312,38 +245,19 @@
     }
 
     function switchTab(id) {
-      const containers = document.querySelectorAll(".container");
-      containers.forEach(c => {
-        if (c.id === id) {
-          c.classList.add("active");
-          c.setAttribute("aria-hidden", "false");
-        } else {
-          c.classList.remove("active");
-          c.setAttribute("aria-hidden", "true");
-        }
-      });
-
-      // Update aria-selected on buttons
-      document.querySelectorAll(".tab-button").forEach(btn => {
-        if (btn.getAttribute("aria-controls") === id) {
-          btn.setAttribute("aria-selected", "true");
-        } else if (btn.hasAttribute("aria-controls")) {
-          btn.setAttribute("aria-selected", "false");
-        }
-      });
+      document.querySelectorAll('.container').forEach(c => c.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
     }
 
-    // GTA 6 countdown
-    const countdownElement = document.getElementById("countdown");
-    const releaseDate = new Date("2025-10-01T00:00:00Z").getTime();
-
-    function updateCountdown() {
+    // Countdown Logic
+    const countdown = document.getElementById("countdown");
+    const gtaRelease = new Date("2025-10-01T00:00:00").getTime();
+    setInterval(() => {
       const now = new Date().getTime();
-      const distance = releaseDate - now;
+      const distance = gtaRelease - now;
 
       if (distance <= 0) {
-        countdownElement.textContent = "🎉 GTA 6 is Released! 🎉";
-        clearInterval(countdownInterval);
+        countdown.innerHTML = "🎉 GTA 6 is out!";
         return;
       }
 
@@ -352,13 +266,27 @@
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      countdownElement.textContent =
-        `${days}d ${hours}h ${minutes}m ${seconds}s`;
-    }
+      countdown.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }, 1000);
 
-    const countdownInterval = setInterval(updateCountdown, 1000);
-    updateCountdown();
+    // Support form mailto handler
+    function sendComplaint(event) {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const message = document.getElementById("message").value.trim();
+
+      if (!name || !email || !message) {
+        alert("Please fill in all fields.");
+        return false;
+      }
+
+      const mailto = `mailto:layavanger@gmail.com?subject=Support%20Request%20from%20${encodeURIComponent(name)}&body=${encodeURIComponent("Name: " + name + "\nEmail: " + email + "\n\nMessage:\n" + message)}`;
+      
+      window.location.href = mailto;
+      return false;
+    }
   </script>
 </body>
 </html>
-
