@@ -3,244 +3,128 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Layavanger Hub</title>
+  <title>LAYAVANGER GAME TOOLS</title>
   <style>
-    :root {
-      --bg-color: #0f0f0f;
-      --text-color: #ffffff;
-      --accent: #00ffff;
-      --button-bg: #00ffff;
-      --button-text: #000000;
-    }
-
     body {
       margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      transition: all 0.3s ease;
-      cursor: url('https://cur.cursors-4u.net/games/gam-16/gam1535.cur'), auto;
-    }
-
-    #particles-js {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-    }
-
-    .fade-in {
-      animation: fadeIn 1s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .container {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 100px 20px;
-      min-height: 100vh;
-      text-align: center;
-    }
-
-    .container.active {
-      display: flex;
+      background-color: #0d0d0d;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: white;
+      cursor: url('https://cur.cursors-4u.net/games/gam-14/gam1322.cur'), auto;
+      overflow-x: hidden;
     }
 
     h1 {
-      color: var(--accent);
-      margin: 20px 0 40px;
-    }
-
-    a, button, .tab-button {
-      display: inline-block;
-      margin: 15px;
-      padding: 14px 24px;
-      font-size: 18px;
-      background-color: var(--button-bg);
-      color: var(--button-text);
-      border: none;
-      border-radius: 10px;
-      text-decoration: none;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    a:hover, button:hover, .tab-button:hover {
-      background-color: var(--accent);
-      color: var(--button-text);
-    }
-
-    .note {
-      margin-top: 40px;
-      font-size: 14px;
-      color: #aaa;
-    }
-
-    .tabs {
       text-align: center;
-      padding-top: 20px;
+      padding: 40px 10px 10px;
+      font-size: 2.2em;
+      color: #00f7ff;
+      text-shadow: 0 0 10px #00f7ff88;
     }
 
-    #countdown {
-      font-size: 28px;
-      margin-top: 20px;
-      color: var(--accent);
+    .tools-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 50px;
     }
 
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 24px;
+    .tool-card {
+      display: flex;
+      align-items: center;
+      background-color: #1c1c1c;
+      color: white;
+      font-weight: bold;
+      padding: 15px 25px;
+      border-radius: 12px;
+      margin: 10px;
+      width: 90%;
+      max-width: 520px;
+      box-shadow: 0 0 10px #00f7ff60;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .tool-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #00f7ffcc;
+    }
+
+    .tool-card img {
+      margin-right: 15px;
+      width: 40px;
+      height: 40px;
+    }
+
+    .footer {
+      text-align: center;
+      color: #888;
+      padding: 30px 10px;
+      font-size: 14px;
+    }
+
+    /* Entry Animation */
+    @keyframes entryAnim {
+      0% {
+        opacity: 0;
+        transform: translateY(-40px);
       }
-      a, button, .tab-button {
-        font-size: 16px;
-        padding: 12px 20px;
+      100% {
+        opacity: 1;
+        transform: translateY(0);
       }
     }
+
+    body.loaded .tool-card {
+      animation: entryAnim 0.6s ease-in-out both;
+    }
+
+    .tool-card:nth-child(1) { animation-delay: 0.1s; }
+    .tool-card:nth-child(2) { animation-delay: 0.2s; }
+    .tool-card:nth-child(3) { animation-delay: 0.3s; }
+    .tool-card:nth-child(4) { animation-delay: 0.4s; }
+    .tool-card:nth-child(5) { animation-delay: 0.5s; }
   </style>
 </head>
 <body>
-  <div id="particles-js"></div>
+  <h1>🎮 LAYAVANGER GAME TOOLS 🎮</h1>
 
-  <div class="tabs">
-    <button class="tab-button" onclick="switchTab('main'); playClick()">🏠 Home</button>
-    <button class="tab-button" onclick="switchTab('gta'); playClick()">🎮 GTA 6</button>
-    <button class="tab-button" onclick="switchTab('warzone'); playClick()">🔥 Warzone</button>
-    <button class="tab-button" onclick="switchTab('cs2'); playClick()">🧨 Counter-Strike 2</button>
-    <button class="tab-button" onclick="switchTab('fortnite'); playClick()">🌀 Fortnite</button>
-    <button class="tab-button" onclick="switchTab('valorant'); playClick()">🎯 Valorant</button>
-    <button class="tab-button" onclick="switchTab('inside'); playClick()">💬 Inside</button>
-    <button class="tab-button" onclick="switchTab('support'); playClick()">📩 Support</button>
+  <div class="tools-section">
+    <a class="tool-card" href="#">
+      <img src="https://img.icons8.com/color/48/gallery.png" alt="Gallery Icon"/>
+      <span>COOL 3D GAME CARD GALLERY</span>
+    </a>
+
+    <a class="tool-card" href="#">
+      <img src="https://img.icons8.com/color/48/valorant.png" alt="Valorant Icon"/>
+      <span>VALORANT</span>
+    </a>
+
+    <a class="tool-card" href="#">
+      <img src="https://img.icons8.com/color/48/fortnite.png" alt="Fortnite Icon"/>
+      <span>FORTNITE</span>
+    </a>
+
+    <a class="tool-card" href="https://t.me/Inside_layavanger" target="_blank">
+      <img src="https://img.icons8.com/color/48/telegram-app--v1.png" alt="Telegram Icon"/>
+      <span>INSIDE</span>
+    </a>
+
+    <a class="tool-card" href="mailto:layavanger@gmail.com">
+      <img src="https://img.icons8.com/fluency/48/customer-support.png" alt="Support Icon"/>
+      <span>SUPPORT CENTER</span>
+    </a>
   </div>
 
-  <!-- Home -->
-  <div id="main" class="container active fade-in">
-    <h1>🚀 Welcome to Layavanger Hub</h1>
-    <a href="https://tlauncher.org/en/" target="_blank" onclick="playClick()">Download TLauncher</a>
-    <a href="https://youtube.com/@layavanger_1?si=2_4KTvuQVhIQm9xg" target="_blank" onclick="playClick()">Visit My YouTube</a>
-    <p class="note">⚠️ TLauncher is unofficial Minecraft software. Use at your own risk.</p>
+  <div class="footer">
+    © 2025 Layavanger
   </div>
 
-  <!-- GTA -->
-  <div id="gta" class="container fade-in">
-    <h1>🎮 Countdown to GTA 6 Release</h1>
-    <div id="countdown">Loading...</div>
-    <p class="note">Expected release: October 1, 2025</p>
-  </div>
-
-  <!-- Warzone -->
-  <div id="warzone" class="container fade-in">
-    <h1>🔥 Download Warzone</h1>
-    <a href="https://www.callofduty.com/warzone" target="_blank" onclick="playClick()">Official Site</a>
-  </div>
-
-  <!-- CS2 -->
-  <div id="cs2" class="container fade-in">
-    <h1>🧨 Download Counter-Strike 2</h1>
-    <a href="https://store.steampowered.com/app/730/CounterStrike_2/" target="_blank" onclick="playClick()">Download on Steam</a>
-  </div>
-
-  <!-- Fortnite -->
-  <div id="fortnite" class="container fade-in">
-    <h1>🌀 Download Fortnite</h1>
-    <a href="https://www.fortnite.com/download" target="_blank" onclick="playClick()">Get Fortnite</a>
-  </div>
-
-  <!-- Valorant -->
-  <div id="valorant" class="container fade-in">
-    <h1>🎯 Download Valorant</h1>
-    <a href="https://playvalorant.com/" target="_blank" onclick="playClick()">Official Website</a>
-  </div>
-
-  <!-- Inside (Telegram) -->
-  <div id="inside" class="container fade-in">
-    <h1>💬 Inside Layavanger</h1>
-    <a href="https://t.me/Inside_layavanger" target="_blank" onclick="playClick()">Join on Telegram</a>
-  </div>
-
-  <!-- Support -->
-  <div id="support" class="container fade-in">
-    <h1>📩 Support Center</h1>
-    <p>If you have any complaints or need help, contact us at:</p>
-    <a href="mailto:layavanger@gmail.com">layavanger@gmail.com</a>
-  </div>
-
-  <!-- Audio -->
-  <audio id="clickSound" src="https://assets.mixkit.co/sfx/preview/mixkit-video-game-mystery-alert-234.wav"></audio>
-
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script>
-    particlesJS("particles-js", {
-      particles: {
-        number: { value: 70 },
-        color: { value: "#00ffff" },
-        shape: { type: "circle" },
-        opacity: { value: 0.25 },
-        size: { value: 3 },
-        line_linked: {
-          enable: true,
-          distance: 150,
-          color: "#00ffff",
-          opacity: 0.2,
-          width: 1
-        },
-        move: { enable: true, speed: 2 }
-      },
-      interactivity: {
-        events: {
-          onhover: { enable: true, mode: "repulse" },
-          onclick: { enable: true, mode: "push" }
-        }
-      },
-      retina_detect: true
+    window.addEventListener('load', () => {
+      document.body.classList.add('loaded');
     });
-
-    function toggleFade(el) {
-      el.classList.remove("fade-in");
-      void el.offsetWidth; // force reflow
-      el.classList.add("fade-in");
-    }
-
-    function playClick() {
-      const audio = document.getElementById("clickSound");
-      audio.currentTime = 0;
-      audio.play();
-    }
-
-    function switchTab(id) {
-      document.querySelectorAll('.container').forEach(c => c.classList.remove('active'));
-      const target = document.getElementById(id);
-      target.classList.add('active');
-      toggleFade(target);
-    }
-
-    // Countdown Timer
-    const countdown = document.getElementById("countdown");
-    const gtaRelease = new Date("2025-10-01T00:00:00").getTime();
-    setInterval(() => {
-      const now = new Date().getTime();
-      const distance = gtaRelease - now;
-
-      if (distance <= 0) {
-        countdown.innerHTML = "🎉 GTA 6 is out!";
-        return;
-      }
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      countdown.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-    }, 1000);
   </script>
 </body>
 </html>
