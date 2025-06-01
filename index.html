@@ -3,180 +3,195 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>LAYAVANGER GAME TOOLS</title>
+  <title>My Launcher Hub</title>
   <style>
+    :root {
+      --bg-color: #0f0f0f;
+      --text-color: #ffffff;
+      --accent: #00ffff;
+      --button-bg: #00ffff;
+      --button-text: #000000;
+    }
+
+    body.light-mode {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --button-bg: #000000;
+      --button-text: #ffffff;
+    }
+
     body {
       margin: 0;
-      background-color: #0d0d0d;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: white;
-      cursor: url('https://cur.cursors-4u.net/games/gam-14/gam1322.cur'), auto;
-      overflow-x: hidden;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: all 0.3s ease;
+    }
+
+    #particles-js {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .container {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 20px;
+      min-height: 100vh;
+      text-align: center;
+    }
+
+    .container.active {
+      display: flex;
     }
 
     h1 {
-      text-align: center;
-      padding: 40px 10px 10px;
-      font-size: 2.2em;
-      color: #00f7ff;
-      text-shadow: 0 0 10px #00f7ff88;
+      color: var(--accent);
+      margin-bottom: 40px;
     }
 
-    .tools-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-bottom: 50px;
-    }
-
-    .tool-card {
-      display: flex;
-      align-items: center;
-      background-color: #1c1c1c;
-      color: white;
-      font-weight: bold;
-      padding: 15px 25px;
-      border-radius: 12px;
-      margin: 10px;
-      width: 90%;
-      max-width: 520px;
-      box-shadow: 0 0 10px #00f7ff60;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    a, button, .tab-button {
+      display: inline-block;
+      margin: 15px;
+      padding: 14px 24px;
+      font-size: 18px;
+      background-color: var(--button-bg);
+      color: var(--button-text);
+      border: none;
+      border-radius: 10px;
+      text-decoration: none;
       cursor: pointer;
-      text-decoration: none;
+      transition: background-color 0.3s ease;
     }
 
-    .tool-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px #00f7ffcc;
+    a:hover, button:hover, .tab-button:hover {
+      background-color: var(--accent);
+      color: var(--button-text);
     }
 
-    .tool-card img {
-      margin-right: 15px;
-      width: 40px;
-      height: 40px;
-    }
-
-    .footer {
-      text-align: center;
-      color: #888;
-      padding: 30px 10px;
+    .note {
+      margin-top: 60px;
       font-size: 14px;
+      color: #aaa;
     }
 
-    /* Entry Animation */
-    @keyframes entryAnim {
-      0% {
-        opacity: 0;
-        transform: translateY(-40px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    body.loaded .tool-card {
-      animation: entryAnim 0.6s ease-in-out both;
-    }
-
-    .countdown {
+    .tabs {
       text-align: center;
-      font-size: 1.5em;
-      color: #ff4d4d;
-      margin: 30px auto 10px;
-      font-weight: bold;
+      padding-top: 20px;
     }
 
-    .youtube-link {
-      text-align: center;
-      margin: 20px auto;
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 24px;
+      }
+      a, button, .tab-button {
+        font-size: 16px;
+        padding: 12px 20px;
+      }
     }
 
-    .youtube-link a {
-      color: #ff0000;
-      font-weight: bold;
-      font-size: 1.1em;
-      text-decoration: none;
+    #countdown {
+      font-size: 28px;
+      margin-top: 20px;
+      color: var(--accent);
     }
-
-    .tool-card:nth-child(1) { animation-delay: 0.1s; }
-    .tool-card:nth-child(2) { animation-delay: 0.2s; }
-    .tool-card:nth-child(3) { animation-delay: 0.3s; }
-    .tool-card:nth-child(4) { animation-delay: 0.4s; }
-    .tool-card:nth-child(5) { animation-delay: 0.5s; }
   </style>
 </head>
 <body>
-  <h1>🎮 LAYAVANGER GAME TOOLS 🎮</h1>
+  <div id="particles-js"></div>
 
-  <div class="countdown" id="countdown">
-    GTA 6 Launch In: Loading...
+  <div class="tabs">
+    <button class="tab-button" onclick="switchTab('main'); playClick()">🏠 Home</button>
+    <button class="tab-button" onclick="switchTab('gta'); playClick()">🎮 GTA 6 Countdown</button>
+    <button class="tab-button" onclick="toggleMode(); playClick()">🌓 Toggle Mode</button>
   </div>
 
-  <div class="tools-section">
-    <a class="tool-card" href="#">
-      <img src="https://img.icons8.com/color/48/gallery.png" alt="Gallery Icon"/>
-      <span>COOL 3D GAME CARD GALLERY</span>
-    </a>
-
-    <a class="tool-card" href="#">
-      <img src="https://img.icons8.com/color/48/valorant.png" alt="Valorant Icon"/>
-      <span>VALORANT</span>
-    </a>
-
-    <a class="tool-card" href="#">
-      <img src="https://img.icons8.com/color/48/fortnite.png" alt="Fortnite Icon"/>
-      <span>FORTNITE</span>
-    </a>
-
-    <a class="tool-card" href="https://t.me/Inside_layavanger" target="_blank">
-      <img src="https://img.icons8.com/color/48/telegram-app--v1.png" alt="Telegram Icon"/>
-      <span>INSIDE</span>
-    </a>
-
-    <a class="tool-card" href="mailto:layavanger@gmail.com">
-      <img src="https://img.icons8.com/fluency/48/customer-support.png" alt="Support Icon"/>
-      <span>SUPPORT CENTER</span>
-    </a>
+  <!-- Home Tab -->
+  <div id="main" class="container active">
+    <h1>🚀 Welcome to My Launcher Hub</h1>
+    <a href="https://tlauncher.org/en/" onclick="playClick()" target="_blank">Download TLauncher</a>
+    <a href="https://youtube.com/@layavanger_1?si=2_4KTvuQVhIQm9xg" onclick="playClick()" target="_blank">Visit My YouTube Channel</a>
+    <p class="note">⚠️ TLauncher is unofficial Minecraft software. Use at your own risk.</p>
   </div>
 
-  <div class="youtube-link">
-    🔴 <a href="https://www.youtube.com/@layavanger" target="_blank">Check out my YouTube Channel → @layavanger</a>
+  <!-- GTA 6 Countdown Tab -->
+  <div id="gta" class="container">
+    <h1>🎮 Countdown to GTA 6 Release</h1>
+    <div id="countdown">Loading...</div>
+    <p class="note">Expected release: October 1, 2025</p>
   </div>
 
-  <div class="footer">
-    © 2025 Layavanger
-  </div>
+  <!-- Click sound -->
+  <audio id="clickSound" src="https://assets.mixkit.co/sfx/preview/mixkit-video-game-mystery-alert-234.wav"></audio>
 
+  <!-- Particles -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script>
-    window.addEventListener('load', () => {
-      document.body.classList.add('loaded');
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 70 },
+        color: { value: "#00ffff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.5 },
+        size: { value: 3 },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#00ffff",
+          opacity: 0.4,
+          width: 1
+        },
+        move: { enable: true, speed: 2 }
+      },
+      interactivity: {
+        events: {
+          onhover: { enable: true, mode: "repulse" },
+          onclick: { enable: true, mode: "push" }
+        }
+      },
+      retina_detect: true
     });
 
-    // GTA 6 Countdown Timer
+    function toggleMode() {
+      document.body.classList.toggle("light-mode");
+    }
+
+    function playClick() {
+      const audio = document.getElementById("clickSound");
+      audio.currentTime = 0;
+      audio.play();
+    }
+
+    function switchTab(id) {
+      document.querySelectorAll('.container').forEach(c => c.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    // Countdown Logic
     const countdown = document.getElementById("countdown");
-    const gta6Date = new Date("December 5, 2025 00:00:00").getTime();
-
-    const updateCountdown = () => {
+    const gtaRelease = new Date("2025-10-01T00:00:00").getTime();
+    setInterval(() => {
       const now = new Date().getTime();
-      const diff = gta6Date - now;
+      const distance = gtaRelease - now;
 
-      if (diff <= 0) {
-        countdown.innerHTML = "🚀 GTA 6 IS OUT NOW!";
+      if (distance <= 0) {
+        countdown.innerHTML = "🎉 GTA 6 is out!";
         return;
       }
 
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      countdown.innerHTML = `GTA 6 Launch In: ${days}d ${hours}h ${minutes}m ${seconds}s`;
-    };
-
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
+      countdown.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }, 1000);
   </script>
 </body>
 </html>
