@@ -80,6 +80,26 @@
       animation: entryAnim 0.6s ease-in-out both;
     }
 
+    .countdown {
+      text-align: center;
+      font-size: 1.5em;
+      color: #ff4d4d;
+      margin: 30px auto 10px;
+      font-weight: bold;
+    }
+
+    .youtube-link {
+      text-align: center;
+      margin: 20px auto;
+    }
+
+    .youtube-link a {
+      color: #ff0000;
+      font-weight: bold;
+      font-size: 1.1em;
+      text-decoration: none;
+    }
+
     .tool-card:nth-child(1) { animation-delay: 0.1s; }
     .tool-card:nth-child(2) { animation-delay: 0.2s; }
     .tool-card:nth-child(3) { animation-delay: 0.3s; }
@@ -89,6 +109,10 @@
 </head>
 <body>
   <h1>🎮 LAYAVANGER GAME TOOLS 🎮</h1>
+
+  <div class="countdown" id="countdown">
+    GTA 6 Launch In: Loading...
+  </div>
 
   <div class="tools-section">
     <a class="tool-card" href="#">
@@ -117,6 +141,10 @@
     </a>
   </div>
 
+  <div class="youtube-link">
+    🔴 <a href="https://www.youtube.com/@layavanger" target="_blank">Check out my YouTube Channel → @layavanger</a>
+  </div>
+
   <div class="footer">
     © 2025 Layavanger
   </div>
@@ -125,6 +153,30 @@
     window.addEventListener('load', () => {
       document.body.classList.add('loaded');
     });
+
+    // GTA 6 Countdown Timer
+    const countdown = document.getElementById("countdown");
+    const gta6Date = new Date("December 5, 2025 00:00:00").getTime();
+
+    const updateCountdown = () => {
+      const now = new Date().getTime();
+      const diff = gta6Date - now;
+
+      if (diff <= 0) {
+        countdown.innerHTML = "🚀 GTA 6 IS OUT NOW!";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      countdown.innerHTML = `GTA 6 Launch In: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+    };
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
   </script>
 </body>
 </html>
