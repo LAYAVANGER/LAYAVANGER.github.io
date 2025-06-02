@@ -6,8 +6,8 @@
   <title>GTA 5 Glitch Hub</title>
   <style>
     :root {
-      --bg-color: #0f0f0f;
-      --text-color: #ffffff;
+      --bg-color: #ffffff;
+      --text-color: #000000;
       --accent: #ff4040;
       --button-bg: #ff4040;
       --button-text: #000000;
@@ -23,27 +23,30 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: radial-gradient(circle at center, #2b0000, #0f0f0f 80%);
+      /* Rockstar-style dark gradient background */
+      background: linear-gradient(135deg, #0b0b0b 0%, #1a1a1a 60%, #111111 100%);
       color: var(--text-color);
       transition: all 0.3s ease;
+      position: relative;
+      overflow-x: hidden;
     }
 
-    /* New glitches background */
-    body.glitches-bg {
-      background: linear-gradient(135deg, #050505 0%, #1a1a1a 100%);
-      background-image:
-        repeating-radial-gradient(circle at 50% 50%, rgba(255, 64, 64, 0.1) 0, rgba(255, 64, 64, 0.05) 10px, transparent 15px),
-        linear-gradient(135deg, #050505 0%, #1a1a1a 100%);
-      animation: glitchPulse 4s infinite alternate;
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -2; /* Behind everything */
+      background: transparent;
     }
 
-    @keyframes glitchPulse {
-      0% {
-        filter: brightness(1);
-      }
-      100% {
-        filter: brightness(1.15);
-      }
+    /* Add subtle dark overlay on top of particles */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(15, 15, 15, 0.85);
+      pointer-events: none;
+      z-index: -1;
     }
 
     .tabs {
@@ -60,11 +63,10 @@
       border-radius: 8px;
       cursor: pointer;
       font-size: 16px;
-      outline: none;
+      transition: background-color 0.3s ease;
     }
 
-    .tab-button:hover,
-    .tab-button[aria-selected="true"] {
+    .tab-button:hover {
       background-color: var(--accent);
     }
 
@@ -121,108 +123,111 @@
 </head>
 <body>
 
-<div class="tabs" role="tablist" aria-label="Main Tabs">
-  <button class="tab-button" role="tab" aria-selected="true" aria-controls="home" id="tab-home" tabindex="0" onclick="switchTab('home'); playClick()">🏠 Home</button>
-  <button class="tab-button" role="tab" aria-selected="false" aria-controls="glitches" id="tab-glitches" tabindex="-1" onclick="switchTab('glitches'); playClick()">🛠️ GTA 5 Glitches</button>
-  <button class="tab-button" role="tab" aria-selected="false" aria-controls="gta6" id="tab-gta6" tabindex="-1" onclick="switchTab('gta6'); playClick()">📰 GTA 6 Leaks & News</button>
-  <button class="tab-button" onclick="toggleMode(); playClick()" aria-label="Toggle Light/Dark Mode">🌓 Toggle Mode</button>
+<div id="particles-js"></div>
+
+<div class="tabs">
+  <button class="tab-button" onclick="switchTab('home'); playClick()">🏠 Home</button>
+  <button class="tab-button" onclick="switchTab('glitches'); playClick()">🛠️ GTA 5 Glitches</button>
+  <button class="tab-button" onclick="switchTab('gta6'); playClick()">🚨 GTA 6 Leaks & News</button>
+  <button class="tab-button" onclick="toggleMode(); playClick()">🌓 Toggle Mode</button>
 </div>
 
 <!-- Home Section -->
-<div id="home" class="container active" role="tabpanel" aria-labelledby="tab-home">
+<div id="home" class="container active">
   <h1>🔥 Welcome to GTA 5 Glitch Hub</h1>
   <p>Your trusted source for GTA 5 glitches, both online and offline.</p>
-  <p><a href="https://youtube.com/@layavanger_1" target="_blank" class="tab-button" style="display: inline-block; margin-top: 10px;">Visit Our YouTube Channel</a></p>
+  <p><a href="https://youtube.com/@layavanger_1" target="_blank" class="tab-button">Visit Our YouTube Channel</a></p>
   <p class="note">This site is unofficial and fan-made. Use glitches responsibly to avoid bans.</p>
 </div>
 
 <!-- Glitch Section -->
-<div id="glitches" class="container" role="tabpanel" aria-labelledby="tab-glitches" hidden>
+<div id="glitches" class="container">
   <h1>🛠️ GTA 5 Glitches</h1>
   <div class="card">
     <h2>💰 Unlimited Money Glitch (GTA Online)</h2>
     <p><strong>How to do it:</strong><br>
-      1. Start the Cluckin Bell Farm Raid mission.<br>
-      2. At the mission prompt, access a custom playlist with specific Contact Missions.<br>
-      3. Follow the steps to trigger the glitch and receive $250,000 upon completion.</p>
+    1. Start the Cluckin Bell Farm Raid mission.<br>
+    2. At the mission prompt, access a custom playlist with specific Contact Missions.<br>
+    3. Follow the steps to trigger the glitch and receive $250,000 upon completion.</p>
     <p class="note">⚠️ Use with caution. Rockstar may patch this glitch or take action against exploiters.</p>
   </div>
 
   <div class="card">
     <h2>🛫 Cayo Perico Replay Glitch (GTA Online)</h2>
     <p><strong>How to do it:</strong><br>
-      1. Complete the Cayo Perico Heist.<br>
-      2. Before the final cutscene, disconnect your internet or close the game.<br>
-      3. Restart the game, and the heist should be available again.</p>
+    1. Complete the Cayo Perico Heist.<br>
+    2. Before the final cutscene, disconnect your internet or close the game.<br>
+    3. Restart the game, and the heist should be available again.</p>
     <p class="note">⚠️ Repeat sparingly to avoid detection. Always deposit your earnings before repeating.</p>
   </div>
 
   <div class="card">
     <h2>📈 Stock Market Exploit (GTA 5 Story Mode)</h2>
     <p><strong>How to do it:</strong><br>
-      1. Save Lester's assassination missions until after completing the main story.<br>
-      2. Invest in the relevant companies before each mission.<br>
-      3. Complete the mission and sell stocks at their peak.</p>
+    1. Save Lester's assassination missions until after completing the main story.<br>
+    2. Invest in the relevant companies before each mission.<br>
+    3. Complete the mission and sell stocks at their peak.</p>
     <p class="note">💡 This is an in-game strategy and not considered a glitch. Safe to use.</p>
   </div>
 </div>
 
 <!-- GTA 6 Leaks & News Section -->
-<div id="gta6" class="container" role="tabpanel" aria-labelledby="tab-gta6" hidden>
-  <h1>📰 GTA 6 Leaks & News</h1>
+<div id="gta6" class="container">
+  <h1>🚨 GTA 6 Leaks & News</h1>
   <div class="card">
-    <h2>📅 Release Date Rumors</h2>
-    <p>According to multiple verified sources, GTA 6 is expected to release in <strong>late 2025</strong> or early 2026. Rockstar has confirmed development but remains tight-lipped on an exact date.</p>
-  </div>
-  <div class="card">
-    <h2>🔍 Verified Leaks Summary</h2>
+    <h2>🎮 Verified GTA 6 Leaks</h2>
     <ul>
-      <li>Map locations reportedly include Vice City, parts of South America, and new fictional cities.</li>
-      <li>Playable characters and improved story depth confirmed.</li>
-      <li>Enhanced multiplayer integration similar to GTA Online but expanded.</li>
+      <li>Map will reportedly include Vice City and new locations.</li>
+      <li>Playable protagonists: rumored to be multiple characters.</li>
+      <li>Enhanced weather and dynamic events expected.</li>
     </ul>
   </div>
+
+  <div class="card">
+    <h2>📅 Release Date Rumors</h2>
+    <p>The latest rumors suggest Rockstar might announce GTA 6 in late 2025, with a release possibly in 2026. Nothing confirmed yet.</p>
+  </div>
+
   <div class="card">
     <h2>⚠️ Disclaimer</h2>
-    <p>This page compiles leaks from verified insiders but Rockstar Games may change features before release. Treat all rumors as unofficial until confirmed.</p>
-  </div>
-  <div class="card">
-    <h2>💡 GTA 5 Glitches Safe Use Tips</h2>
-    <p>Use glitches responsibly in GTA 5 Online to avoid bans. Always back up your data and be aware Rockstar regularly patches exploits.</p>
+    <p>This site shares leaks and rumors from verified sources but is not affiliated with Rockstar Games. Always take leaks with caution.</p>
   </div>
 </div>
 
 <!-- Click Sound -->
 <audio id="clickSound" src="https://assets.mixkit.co/sfx/preview/mixkit-click-1109.wav"></audio>
 
+<!-- Particle JS -->
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script>
+  particlesJS("particles-js", {
+    particles: {
+      number: { value: 80 },
+      color: { value: "#ff4040" },
+      shape: { type: "circle" },
+      opacity: { value: 0.4 },
+      size: { value: 3 },
+      line_linked: {
+        enable: true,
+        distance: 130,
+        color: "#ff4040",
+        opacity: 0.5,
+        width: 1
+      },
+      move: { enable: true, speed: 2 }
+    },
+    interactivity: {
+      events: {
+        onhover: { enable: true, mode: "repulse" },
+        onclick: { enable: true, mode: "push" }
+      }
+    },
+    retina_detect: true
+  });
+
   function switchTab(id) {
-    const tabs = document.querySelectorAll('.tab-button[role="tab"]');
-    const containers = document.querySelectorAll('[role="tabpanel"]');
-
-    containers.forEach(panel => {
-      panel.classList.remove('active');
-      panel.setAttribute('hidden', 'true');
-    });
-    tabs.forEach(tab => {
-      tab.setAttribute('aria-selected', 'false');
-      tab.setAttribute('tabindex', '-1');
-    });
-
+    document.querySelectorAll('.container').forEach(c => c.classList.remove('active'));
     document.getElementById(id).classList.add('active');
-    document.getElementById(id).removeAttribute('hidden');
-
-    const activeTab = document.querySelector(`.tab-button[aria-controls="${id}"]`);
-    activeTab.setAttribute('aria-selected', 'true');
-    activeTab.setAttribute('tabindex', '0');
-    activeTab.focus();
-
-    // Toggle glitches background only for glitches tab
-    if(id === 'glitches') {
-      document.body.classList.add('glitches-bg');
-    } else {
-      document.body.classList.remove('glitches-bg');
-    }
   }
 
   function toggleMode() {
