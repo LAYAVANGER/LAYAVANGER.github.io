@@ -1,197 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Launcher Hub</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GTA Fan Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-color: #0f0f0f;
-      --text-color: #ffffff;
-      --accent: #00ffff;
-      --button-bg: #00ffff;
-      --button-text: #000000;
+      --bg-color: #0c0c0c;
+      --text-color: #fff;
+      --accent: #ff0055;
+      --button-bg: #ff0055;
+      --button-text: #fff;
     }
 
     body.light-mode {
-      --bg-color: #ffffff;
-      --text-color: #000000;
-      --button-bg: #000000;
-      --button-text: #ffffff;
+      --bg-color: #fff;
+      --text-color: #000;
+      --button-bg: #000;
+      --button-text: #fff;
     }
 
     body {
       margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      background-color: var(--bg-color);
+      font-family: 'Orbitron', sans-serif;
+      background: url('https://wallpaperaccess.com/full/4723255.jpg') no-repeat center center fixed;
+      background-size: cover;
       color: var(--text-color);
-      transition: all 0.3s ease;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
-    #particles-js {
-      position: fixed;
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.8);
+      position: absolute;
       top: 0; left: 0;
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       z-index: -1;
-    }
-
-    .container {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 100px 20px;
-      min-height: 100vh;
-      text-align: center;
-    }
-
-    .container.active {
-      display: flex;
-    }
-
-    h1 {
-      color: var(--accent);
-      margin-bottom: 40px;
-    }
-
-    a, button, .tab-button {
-      display: inline-block;
-      margin: 15px;
-      padding: 14px 24px;
-      font-size: 18px;
-      background-color: var(--button-bg);
-      color: var(--button-text);
-      border: none;
-      border-radius: 10px;
-      text-decoration: none;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    a:hover, button:hover, .tab-button:hover {
-      background-color: var(--accent);
-      color: var(--button-text);
-    }
-
-    .note {
-      margin-top: 60px;
-      font-size: 14px;
-      color: #aaa;
     }
 
     .tabs {
       text-align: center;
-      padding-top: 20px;
+      padding: 20px;
     }
 
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 24px;
-      }
-      a, button, .tab-button {
-        font-size: 16px;
-        padding: 12px 20px;
-      }
+    .tab-button {
+      background-color: var(--button-bg);
+      color: var(--button-text);
+      border: none;
+      padding: 12px 20px;
+      margin: 10px;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
     }
 
-    #countdown {
-      font-size: 28px;
-      margin-top: 20px;
+    .tab-button:hover {
+      background-color: var(--accent);
+    }
+
+    .container {
+      display: none;
+      max-width: 900px;
+      margin: auto;
+      padding: 60px 20px;
+    }
+
+    .container.active {
+      display: block;
+    }
+
+    h1, h2 {
       color: var(--accent);
+    }
+
+    .card {
+      background-color: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: 10px;
+      margin: 20px 0;
     }
   </style>
 </head>
 <body>
-  <div id="particles-js"></div>
+  <div class="overlay"></div>
 
   <div class="tabs">
-    <button class="tab-button" onclick="switchTab('main'); playClick()">🏠 Home</button>
-    <button class="tab-button" onclick="switchTab('gta'); playClick()">🎮 GTA 6 Countdown</button>
-    <button class="tab-button" onclick="toggleMode(); playClick()">🌓 Toggle Mode</button>
+    <button class="tab-button" onclick="switchTab('home')">🏠 Home</button>
+    <button class="tab-button" onclick="switchTab('leaks')">🕵️ GTA 6 Leaks</button>
+    <button class="tab-button" onclick="switchTab('news')">📰 News</button>
+    <button class="tab-button" onclick="switchTab('glitches')">🐞 Glitches</button>
+    <button class="tab-button" onclick="toggleMode()">🌓 Toggle Mode</button>
   </div>
 
-  <!-- Home Tab -->
-  <div id="main" class="container active">
-    <h1>🚀 Welcome to My Launcher Hub</h1>
-    <a href="https://tlauncher.org/en/" onclick="playClick()" target="_blank">Download TLauncher</a>
-    <a href="https://youtube.com/@layavanger_1?si=2_4KTvuQVhIQm9xg" onclick="playClick()" target="_blank">Visit My YouTube Channel</a>
-    <p class="note">⚠️ TLauncher is unofficial Minecraft software. Use at your own risk.</p>
+  <div id="home" class="container active">
+    <h1>🚀 Welcome to the GTA Fan Hub</h1>
+    <p>Your go-to place for all the latest GTA 6 leaks, news, and crazy bugs across all GTA titles.</p>
+    <p>Subscribe to our <a href="https://youtube.com/@layavanger_1" target="_blank" style="color: var(--accent);">YouTube channel</a> for video content!</p>
   </div>
 
-  <!-- GTA 6 Countdown Tab -->
-  <div id="gta" class="container">
-    <h1>🎮 Countdown to GTA 6 Release</h1>
-    <div id="countdown">Loading...</div>
-    <p class="note">Expected release: October 1, 2025</p>
+  <div id="leaks" class="container">
+    <h2>🕵️ Verified GTA 6 Leaks</h2>
+    <div class="card">
+      <strong>🚨 Leak #1:</strong> Vice City map preview leaked from dev server.<br>
+      <em>Date:</em> May 10, 2025<br>
+      <em>Source:</em> Internal screenshot via test environment.<br>
+      <a href="#">View Image</a>
+    </div>
+    <!-- Add more leaks similarly -->
   </div>
 
-  <!-- Click sound -->
-  <audio id="clickSound" src="https://assets.mixkit.co/sfx/preview/mixkit-video-game-mystery-alert-234.wav"></audio>
+  <div id="news" class="container">
+    <h2>📰 GTA News</h2>
+    <div class="card">
+      <strong>🗓 May 20, 2025:</strong> Rockstar announces GTA 6 will release October 1, 2025!
+    </div>
+    <!-- Add more news items -->
+  </div>
 
-  <!-- Particles -->
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <div id="glitches" class="container">
+    <h2>🐞 Glitches & Bugs</h2>
+    <div class="card">
+      <strong>🧱 GTA V:</strong> Wall breach glitch at Maze Bank Tower.
+      <br><a href="#">Watch Video</a>
+    </div>
+    <div class="card">
+      <strong>🚗 GTA San Andreas:</strong> Car duplication glitch using garage method.
+    </div>
+    <!-- Add more glitches -->
+  </div>
+
   <script>
-    particlesJS("particles-js", {
-      particles: {
-        number: { value: 70 },
-        color: { value: "#00ffff" },
-        shape: { type: "circle" },
-        opacity: { value: 0.5 },
-        size: { value: 3 },
-        line_linked: {
-          enable: true,
-          distance: 150,
-          color: "#00ffff",
-          opacity: 0.4,
-          width: 1
-        },
-        move: { enable: true, speed: 2 }
-      },
-      interactivity: {
-        events: {
-          onhover: { enable: true, mode: "repulse" },
-          onclick: { enable: true, mode: "push" }
-        }
-      },
-      retina_detect: true
-    });
-
-    function toggleMode() {
-      document.body.classList.toggle("light-mode");
-    }
-
-    function playClick() {
-      const audio = document.getElementById("clickSound");
-      audio.currentTime = 0;
-      audio.play();
-    }
-
     function switchTab(id) {
       document.querySelectorAll('.container').forEach(c => c.classList.remove('active'));
       document.getElementById(id).classList.add('active');
     }
 
-    // Countdown Logic
-    const countdown = document.getElementById("countdown");
-    const gtaRelease = new Date("2025-10-01T00:00:00").getTime();
-    setInterval(() => {
-      const now = new Date().getTime();
-      const distance = gtaRelease - now;
-
-      if (distance <= 0) {
-        countdown.innerHTML = "🎉 GTA 6 is out!";
-        return;
-      }
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      countdown.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-    }, 1000);
+    function toggleMode() {
+      document.body.classList.toggle('light-mode');
+    }
   </script>
 </body>
 </html>
