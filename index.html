@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Rockstar Fan Hub</title>
+  <title>Rockstar Hub – GTA 6 & Glitches</title>
   <style>
     :root {
       --bg-color: #0f0f0f;
       --text-color: #ffffff;
-      --accent: #00ffff;
-      --button-bg: #00ffff;
+      --accent: #ff4040;
+      --button-bg: #ff4040;
       --button-text: #000000;
     }
 
@@ -22,8 +22,7 @@
 
     body {
       margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: var(--bg-color);
       color: var(--text-color);
       transition: all 0.3s ease;
@@ -31,7 +30,6 @@
 
     #particles-js {
       position: fixed;
-      top: 0; left: 0;
       width: 100%;
       height: 100%;
       z-index: -1;
@@ -39,19 +37,18 @@
 
     .tabs {
       text-align: center;
-      padding: 15px;
+      padding: 20px;
     }
 
     .tab-button {
-      margin: 10px;
-      padding: 12px 20px;
-      font-size: 16px;
-      border: none;
-      border-radius: 8px;
       background-color: var(--button-bg);
       color: var(--button-text);
+      margin: 10px;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
       cursor: pointer;
-      transition: 0.3s;
+      font-size: 16px;
     }
 
     .tab-button:hover {
@@ -60,7 +57,7 @@
 
     .container {
       display: none;
-      padding: 100px 20px;
+      padding: 40px 20px;
       min-height: 100vh;
       text-align: center;
     }
@@ -71,137 +68,142 @@
 
     h1 {
       color: var(--accent);
-      margin-bottom: 20px;
+      font-size: 32px;
     }
 
-    a {
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 800px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      text-align: left;
+    }
+
+    .card h2 {
       color: var(--accent);
-      text-decoration: none;
     }
 
     .note {
-      margin-top: 30px;
       font-size: 14px;
       color: #aaa;
+      margin-top: 10px;
     }
 
-    #countdown {
-      font-size: 28px;
-      color: var(--accent);
-      margin-top: 20px;
+    a, button {
+      text-decoration: none;
+      transition: 0.3s ease;
     }
 
     @media (max-width: 600px) {
+      h1 {
+        font-size: 24px;
+      }
       .tab-button {
         font-size: 14px;
-        padding: 10px 15px;
-      }
-
-      h1 {
-        font-size: 22px;
-      }
-
-      #countdown {
-        font-size: 20px;
       }
     }
   </style>
 </head>
 <body>
-  <div id="particles-js"></div>
 
-  <div class="tabs">
-    <button class="tab-button" onclick="switchTab('home')">🏠 Home</button>
-    <button class="tab-button" onclick="switchTab('leaks')">📢 Leaks</button>
-    <button class="tab-button" onclick="switchTab('news')">📰 News</button>
-    <button class="tab-button" onclick="switchTab('glitches')">🐞 Glitches</button>
-    <button class="tab-button" onclick="toggleMode()">🌓 Toggle Mode</button>
+<div id="particles-js"></div>
+
+<div class="tabs">
+  <button class="tab-button" onclick="switchTab('home'); playClick()">🏠 Home</button>
+  <button class="tab-button" onclick="switchTab('gta6'); playClick()">🚨 GTA 6 Leaks</button>
+  <button class="tab-button" onclick="switchTab('glitches'); playClick()">🛠️ Glitches & Bugs</button>
+  <button class="tab-button" onclick="toggleMode(); playClick()">🌓 Toggle Mode</button>
+</div>
+
+<!-- Home Section -->
+<div id="home" class="container active">
+  <h1>🔥 Welcome to Rockstar Fan Hub</h1>
+  <p>Your trusted source for GTA 6 leaks, news, and safe glitching.</p>
+  <p><a href="https://youtube.com/@layavanger_1" target="_blank" class="tab-button">Visit Our YouTube Channel</a></p>
+  <p class="note">This site is unofficial and fan-made. We do not promote hacking or cheating.</p>
+</div>
+
+<!-- GTA 6 Leaks -->
+<div id="gta6" class="container">
+  <h1>🚨 Latest GTA 6 Leaks</h1>
+  <div class="card">
+    <h2>🌴 Vice City Map Leak</h2>
+    <p>Recent footage shows expanded Vice City areas, improved AI, and character switching like GTA V. Not confirmed by Rockstar but consistent with past insider leaks.</p>
+  </div>
+  <div class="card">
+    <h2>📅 Release Date</h2>
+    <p>Expected October 2025 – Rockstar is tight-lipped, but marketing push begins summer 2025.</p>
+  </div>
+</div>
+
+<!-- Glitch Section -->
+<div id="glitches" class="container">
+  <h1>🛠️ Safe GTA Glitches</h1>
+  <div class="card">
+    <h2>💰 Unlimited Money Glitch (GTA V Online)</h2>
+    <p><strong>How to do it:</strong><br>
+    1. Go to the Los Santos Customs with a fully upgraded car.<br>
+    2. Sell it, then disconnect your internet exactly when you confirm the sell.<br>
+    3. Reconnect and restart the game.<br>
+    4. Your car and money should still be there.</p>
+    <p class="note">⚠️ Do this only once every 24 hours. Abuse could flag your account. Avoid public lobbies.</p>
   </div>
 
-  <div id="home" class="container active">
-    <h1>🎮 Welcome to Rockstar Fan Hub</h1>
-    <p>Explore all real leaks, updates, and bugs across all GTA games.</p>
-    <p><strong>GTA 6 Countdown:</strong></p>
-    <div id="countdown">Loading...</div>
-    <p class="note">Expected release: October 1, 2025</p>
-    <p><a href="https://youtube.com/@layavanger_1?si=E3SbcHtlMwAs1grZ" target="_blank">▶️ Visit My YouTube Channel</a></p>
+  <div class="card">
+    <h2>🛫 Fly Without a Plane (GTA SA)</h2>
+    <p>Use the jetpack and crouch repeatedly while facing a slope. Your character will start floating up if timed right.</p>
+    <p class="note">Classic glitch, safe to use. No bans reported.</p>
   </div>
+</div>
 
-  <div id="leaks" class="container">
-    <h1>📢 GTA 6 Leaks</h1>
-    <p>✅ Real leaks from trusted sources will be posted here.</p>
-    <p>🔐 Leak 1: Vice City confirmed map area leaked.</p>
-    <p>🎥 Leak 2: Female protagonist footage early build.</p>
-  </div>
+<!-- Click Sound -->
+<audio id="clickSound" src="https://assets.mixkit.co/sfx/preview/mixkit-click-1109.wav"></audio>
 
-  <div id="news" class="container">
-    <h1>📰 GTA News</h1>
-    <p>🆕 June 2025: Rockstar teaser hints at a new reveal.</p>
-    <p>📦 Patch 1.38 for GTA 5 adds new missions.</p>
-  </div>
-
-  <div id="glitches" class="container">
-    <h1>🐞 Glitches & Bugs</h1>
-    <p>🐛 GTA 5: Car duplication glitch (still working!)</p>
-    <p>🛠 GTA Online: Invisible gun exploit (patched May 2025)</p>
-  </div>
-
-  <!-- Particles.js background -->
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <script>
-    particlesJS("particles-js", {
-      particles: {
-        number: { value: 70 },
-        color: { value: "#00ffff" },
-        shape: { type: "circle" },
-        opacity: { value: 0.5 },
-        size: { value: 3 },
-        line_linked: {
-          enable: true,
-          distance: 150,
-          color: "#00ffff",
-          opacity: 0.4,
-          width: 1
-        },
-        move: { enable: true, speed: 2 }
+<!-- Particle JS -->
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script>
+  particlesJS("particles-js", {
+    particles: {
+      number: { value: 80 },
+      color: { value: "#ff4040" },
+      shape: { type: "circle" },
+      opacity: { value: 0.4 },
+      size: { value: 3 },
+      line_linked: {
+        enable: true,
+        distance: 130,
+        color: "#ff4040",
+        opacity: 0.5,
+        width: 1
       },
-      interactivity: {
-        events: {
-          onhover: { enable: true, mode: "repulse" },
-          onclick: { enable: true, mode: "push" }
-        }
-      },
-      retina_detect: true
-    });
-
-    function toggleMode() {
-      document.body.classList.toggle("light-mode");
-    }
-
-    function switchTab(id) {
-      document.querySelectorAll('.container').forEach(c => c.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-    }
-
-    // Countdown Logic
-    const countdown = document.getElementById("countdown");
-    const gtaRelease = new Date("2025-10-01T00:00:00").getTime();
-    setInterval(() => {
-      const now = new Date().getTime();
-      const distance = gtaRelease - now;
-
-      if (distance <= 0) {
-        countdown.innerHTML = "🎉 GTA 6 is out!";
-        return;
+      move: { enable: true, speed: 2 }
+    },
+    interactivity: {
+      events: {
+        onhover: { enable: true, mode: "repulse" },
+        onclick: { enable: true, mode: "push" }
       }
+    },
+    retina_detect: true
+  });
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  function switchTab(id) {
+    document.querySelectorAll('.container').forEach(c => c.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
 
-      countdown.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-    }, 1000);
-  </script>
+  function toggleMode() {
+    document.body.classList.toggle("light-mode");
+  }
+
+  function playClick() {
+    const audio = document.getElementById("clickSound");
+    audio.currentTime = 0;
+    audio.play();
+  }
+</script>
+
 </body>
 </html>
