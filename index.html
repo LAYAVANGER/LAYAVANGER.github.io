@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>GTA 5 Glitch Hub</title>
-  <meta name="description" content="Your trusted source for GTA 5 glitches, GTA 6 leaks, and latest Rockstar news. Stay updated with verified glitches and release rumors." />
-  <meta name="keywords" content="GTA 5 glitches, GTA Online glitches, GTA 6 leaks, Rockstar Games, GTA 5 money glitch, GTA 6 release date" />
+  <title>GTA 5 Glitch Hub | Verified Glitches & GTA 6 News</title>
+  <meta name="description" content="Your trusted source for verified GTA 5 glitches (online & offline), GTA 6 leaks, release date rumors, and detailed guides to avoid bans." />
+  <meta name="keywords" content="GTA5, GTA 5 glitches, GTA 6 leaks, GTA Online, Rockstar Games, gaming glitches, GTA 5 money glitch" />
   <meta name="author" content="layavanger" />
-
   <style>
     :root {
       --bg-color: #0f0f0f;
@@ -25,38 +24,42 @@
     }
 
     body {
-      /* Rockstar-inspired deep dark red gradient background */
-      background: linear-gradient(135deg, #0a0a0a 0%, #330000 40%, #660000 75%, #330000 100%);
-      color: var(--text-color);
-      transition: all 0.3s ease;
-      position: relative;
-      overflow-x: hidden;
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: radial-gradient(circle at center, #1e1e1e 0%, #0b0b0b 80%);
+      background-image:
+        url('https://cdn.wallpapersafari.com/21/21/8jo0qs.jpg'),
+        radial-gradient(circle at center, #1e1e1e 0%, #0b0b0b 80%);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+      color: var(--text-color);
+      transition: all 0.3s ease;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
 
-    /* Subtle smoky overlay for depth */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(circle at center, rgba(255, 64, 64, 0.15), transparent 70%);
-      pointer-events: none;
-      z-index: -1;
+    body.light-mode {
+      background: #f9f9f9;
+      color: var(--text-color);
     }
 
     #particles-js {
       position: fixed;
       width: 100%;
       height: 100%;
-      z-index: -2;
+      z-index: -1;
+      opacity: 0.25;
     }
 
     .tabs {
       text-align: center;
       padding: 20px;
-      z-index: 10;
-      position: relative;
+      background-color: rgba(15,15,15,0.85);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(255, 64, 64, 0.3);
     }
 
     .tab-button {
@@ -78,12 +81,14 @@
     .container {
       display: none;
       padding: 40px 20px;
-      min-height: 100vh;
-      text-align: center;
+      min-height: 80vh;
       max-width: 900px;
-      margin: 0 auto;
-      z-index: 10;
-      position: relative;
+      margin: 0 auto 50px auto;
+      text-align: center;
+      background: rgba(255,255,255,0.05);
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(255,64,64,0.25);
+      backdrop-filter: blur(10px);
     }
 
     .container.active {
@@ -97,7 +102,7 @@
     }
 
     .card {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.1);
       border-radius: 12px;
       padding: 20px;
       margin: 20px auto;
@@ -122,47 +127,64 @@
       transition: 0.3s ease;
     }
 
-    /* Newsletter Styles */
-    #newsletter {
-      background: rgba(255,255,255,0.05);
-      padding: 25px 20px;
-      border-radius: 12px;
-      max-width: 500px;
-      margin: 30px auto;
-      text-align: center;
-      color: var(--text-color);
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    form#newsletterForm {
+      margin-top: 20px;
     }
 
-    #newsletter input[type="email"] {
-      padding: 12px;
-      width: 70%;
-      border: none;
+    input[type="email"] {
+      padding: 10px;
       border-radius: 8px;
+      border: none;
+      width: 250px;
+      max-width: 90vw;
       margin-right: 10px;
-      font-size: 16px;
     }
 
-    #newsletter button {
-      padding: 12px 20px;
+    button#subscribeBtn {
+      padding: 10px 20px;
       background-color: var(--accent);
-      color: #000;
       border: none;
       border-radius: 8px;
+      color: #000;
       cursor: pointer;
-      font-size: 16px;
+      font-weight: 600;
       transition: background-color 0.3s ease;
     }
 
-    #newsletter button:hover {
-      background-color: #ff6060;
+    button#subscribeBtn:hover {
+      background-color: #ff6b6b;
     }
 
-    #thankyouMessage {
-      display: none;
-      margin-top: 15px;
-      color: #90ee90;
-      font-weight: bold;
+    /* Comment section styles */
+    #commentSection h1 {
+      margin-bottom: 15px;
+    }
+
+    #commentForm input[type="text"] {
+      padding: 8px;
+      border-radius: 5px;
+      border: none;
+      margin-right: 10px;
+      max-width: 45%;
+    }
+
+    #commentForm button {
+      padding: 8px 15px;
+      border: none;
+      border-radius: 5px;
+      background: var(--accent);
+      color: #000;
+      cursor: pointer;
+    }
+
+    #commentsList > div {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.4);
+      color: var(--text-color);
+      text-align: left;
     }
 
     @media (max-width: 600px) {
@@ -171,183 +193,205 @@
       }
       .tab-button {
         font-size: 14px;
-        padding: 10px 16px;
+        padding: 10px 14px;
       }
-      #newsletter input[type="email"] {
+      #commentForm input[type="text"] {
+        max-width: 100%;
+        margin-bottom: 10px;
+      }
+      #commentForm button {
         width: 100%;
-        margin: 0 0 10px 0;
-      }
-      #newsletter button {
-        width: 100%;
-      }
-      #newsletter {
-        padding: 20px 15px;
       }
     }
   </style>
 </head>
 <body>
 
-  <div id="particles-js"></div>
+<div id="particles-js"></div>
 
-  <div class="tabs">
-    <button class="tab-button" onclick="switchTab('home'); playClick()">🏠 Home</button>
-    <button class="tab-button" onclick="switchTab('glitches'); playClick()">🛠️ GTA 5 Glitches</button>
-    <button class="tab-button" onclick="switchTab('gta6'); playClick()">🚨 GTA 6 Leaks & News</button>
-    <button class="tab-button" onclick="toggleMode(); playClick()">🌓 Toggle Mode</button>
+<div class="tabs">
+  <button class="tab-button" onclick="switchTab('home'); playClick()">🏠 Home</button>
+  <button class="tab-button" onclick="switchTab('glitches'); playClick()">🛠️ GTA 5 Glitches</button>
+  <button class="tab-button" onclick="switchTab('leaks'); playClick()">📰 GTA 6 Leaks & News</button>
+  <button class="tab-button" onclick="switchTab('comments'); playClick()">💬 Comments</button>
+  <button class="tab-button" onclick="toggleMode(); playClick()">🌓 Toggle Mode</button>
+</div>
+
+<!-- Home Section -->
+<div id="home" class="container active">
+  <h1>🔥 Welcome to GTA 5 Glitch Hub</h1>
+  <p>Your trusted source for GTA 5 glitches, both online and offline.</p>
+  <p><a href="https://youtube.com/@layavanger_1" target="_blank" class="tab-button" style="display:inline-block; margin-top:15px;">Visit Our YouTube Channel</a></p>
+  <p class="note">This site is unofficial and fan-made. Use glitches responsibly to avoid bans.</p>
+
+  <h2>Subscribe to our newsletter</h2>
+  <form id="newsletterForm" onsubmit="subscribeNewsletter(event)">
+    <input type="email" id="emailInput" placeholder="Enter your email" required />
+    <button id="subscribeBtn" type="submit">Subscribe</button>
+  </form>
+  <p id="subscribeMsg" style="margin-top:10px; font-size:14px;"></p>
+</div>
+
+<!-- Glitch Section -->
+<div id="glitches" class="container">
+  <h1>🛠️ GTA 5 Glitches</h1>
+  <div class="card">
+    <h2>💰 Unlimited Money Glitch (GTA Online)</h2>
+    <p><strong>How to do it:</strong><br>
+    1. Start the Cluckin Bell Farm Raid mission.<br>
+    2. At the mission prompt, access a custom playlist with specific Contact Missions.<br>
+    3. Follow the steps to trigger the glitch and receive $250,000 upon completion.</p>
+    <p class="note">⚠️ Use with caution. Rockstar may patch this glitch or take action against exploiters.</p>
   </div>
 
-  <!-- Home Section -->
-  <div id="home" class="container active">
-    <h1>🔥 Welcome to GTA 5 Glitch Hub</h1>
-    <p>Your trusted source for GTA 5 glitches, both online and offline.</p>
-    <p><a href="https://youtube.com/@layavanger_1" target="_blank" class="tab-button">Visit Our YouTube Channel</a></p>
-    <p class="note">This site is unofficial and fan-made. Use glitches responsibly to avoid bans.</p>
-
-    <!-- Newsletter Signup -->
-    <div id="newsletter">
-      <h2>Subscribe to our Newsletter</h2>
-      <form id="newsletterForm" onsubmit="return handleNewsletterSubmit(event)">
-        <input type="email" id="emailInput" placeholder="Enter your email" required />
-        <button type="submit">Subscribe</button>
-      </form>
-      <div id="thankyouMessage">Thank you for subscribing!</div>
-    </div>
+  <div class="card">
+    <h2>🛫 Cayo Perico Replay Glitch (GTA Online)</h2>
+    <p><strong>How to do it:</strong><br>
+    1. Complete the Cayo Perico Heist.<br>
+    2. Before the final cutscene, disconnect your internet or close the game.<br>
+    3. Restart the game, and the heist should be available again.</p>
+    <p class="note">⚠️ Repeat sparingly to avoid detection. Always deposit your earnings before repeating.</p>
   </div>
 
-  <!-- Glitches Section -->
-  <div id="glitches" class="container">
-    <h1>🛠️ GTA 5 Glitches</h1>
-
-    <div class="card">
-      <h2>💰 Unlimited Money Glitch (GTA Online)</h2>
-      <p><strong>How to do it:</strong><br>
-      1. Start the Cluckin Bell Farm Raid mission.<br>
-      2. At the mission prompt, access a custom playlist with specific Contact Missions.<br>
-      3. Follow the steps to trigger the glitch and receive $250,000 upon completion.</p>
-      <p class="note">⚠️ Use with caution. Rockstar may patch this glitch or take action against exploiters.</p>
-    </div>
-
-    <div class="card">
-      <h2>🛫 Cayo Perico Replay Glitch (GTA Online)</h2>
-      <p><strong>How to do it:</strong><br>
-      1. Complete the Cayo Perico Heist.<br>
-      2. Before the final cutscene, disconnect your internet or close the game.<br>
-      3. Restart the game, and the heist should be available again.</p>
-      <p class="note">⚠️ Repeat sparingly to avoid detection. Always deposit your earnings before repeating.</p>
-    </div>
-
-    <div class="card">
-      <h2>📈 Stock Market Exploit (GTA 5 Story Mode)</h2>
-      <p><strong>How to do it:</strong><br>
-      1. Save Lester's assassination missions until after completing the main story.<br>
-      2. Invest in the relevant companies before each mission.<br>
-      3. Complete the mission and sell stocks at their peak.</p>
-      <p class="note">💡 This is an in-game strategy and not considered a glitch. Safe to use.</p>
-    </div>
+  <div class="card">
+    <h2>📈 Stock Market Exploit (GTA 5 Story Mode)</h2>
+    <p><strong>How to do it:</strong><br>
+    1. Save Lester's assassination missions until after completing the main story.<br>
+    2. Invest in the relevant companies before each mission.<br>
+    3. Complete the mission and sell stocks at their peak.</p>
+    <p class="note">💡 This is an in-game strategy and not considered a glitch. Safe to use.</p>
   </div>
+</div>
 
-  <!-- GTA 6 Leaks & News Section -->
-  <div id="gta6" class="container">
-    <h1>🚨 GTA 6 Leaks & News</h1>
-
-    <div class="card">
-      <h2>🎮 Verified GTA 6 Leaks</h2>
-      <ul>
-        <li>Map will include multiple cities, including Vice City.</li>
-        <li>Playable characters are expected to be two main protagonists.</li>
-        <li>New heist mechanics and advanced AI enhancements.</li>
-        <li>Next-gen graphics and weather system improvements.</li>
-      </ul>
-      <p class="note">*Leaks are based on verified sources but Rockstar has not confirmed all details.</p>
-    </div>
-
-    <div class="card">
-      <h2>📅 GTA 6 Release Date Rumors</h2>
-      <p>The most credible rumor suggests a release in <strong>late 2025</strong>, possibly Q4.</p>
-      <p>Rockstar has kept tight-lipped but recent job listings hint at final development stages.</p>
-      <p class="note">*Please treat release dates as unofficial until Rockstar confirms.</p>
-    </div>
-
-    <div class="card">
-      <h2>⚠️ Disclaimer</h2>
-      <p>This site shares leaks and rumors for entertainment and informational purposes only. Rockstar Games has not officially announced all GTA 6 details yet.</p>
-      <p class="note">Use this info responsibly and stay tuned for official updates.</p>
-    </div>
+<!-- GTA 6 Leaks Section -->
+<div id="leaks" class="container">
+  <h1>📰 GTA 6 Leaks & News</h1>
+  <div class="card">
+    <h2>🚨 Verified GTA 6 Leak Highlights</h2>
+    <ul>
+      <li>📅 Possible Release Date: Late 2025 to Early 2026 (unconfirmed, rumors only)</li>
+      <li>🌍 Setting: Multiple cities with dynamic weather & time systems.</li>
+      <li>🎮 New Gameplay Features: Enhanced NPC AI, new heists, and expanded multiplayer modes.</li>
+      <li>🛠️ Rockstar actively patching exploits and glitches from early beta leaks.</li>
+    </ul>
+    <p class="note">⚠️ Remember: These are leaks & rumors only. Official Rockstar announcements come first!</p>
   </div>
+  <div class="card">
+    <h2>📰 Stay Updated</h2>
+    <p>Follow our newsletter & social channels to never miss verified GTA 6 news & updates.</p>
+  </div>
+</div>
 
-  <!-- Click Sound -->
-  <audio id="clickSound" src="https://assets.mixkit.co/sfx/preview/mixkit-click-1109.wav"></audio>
+<!-- Comments Section -->
+<div id="comments" class="container">
+  <h1>💬 Comments</h1>
+  <form id="commentForm" onsubmit="addComment(event)">
+    <input type="text" id="username" placeholder="Your name" required />
+    <input type="text" id="commentText" placeholder="Your comment" required />
+    <button type="submit">Post</button>
+  </form>
+  <div id="commentsList"></div>
+</div>
 
-  <!-- Particle JS -->
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <script>
-    particlesJS("particles-js", {
-      particles: {
-        number: { value: 80 },
-        color: { value: "#ff4040" },
-        shape: { type: "circle" },
-        opacity: { value: 0.4 },
-        size: { value: 3 },
-        line_linked: {
-          enable: true,
-          distance: 130,
-          color: "#ff4040",
-          opacity: 0.5,
-          width: 1
-        },
-        move: { enable: true, speed: 2 }
+<!-- Click Sound -->
+<audio id="clickSound" src="https://assets.mixkit.co/sfx/preview/mixkit-click-1109.wav"></audio>
+
+<!-- Particle JS -->
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+<script>
+  particlesJS("particles-js", {
+    particles: {
+      number: { value: 80 },
+      color: { value: "#ff4040" },
+      shape: { type: "circle" },
+      opacity: { value: 0.4 },
+      size: { value: 3 },
+      line_linked: {
+        enable: true,
+        distance: 130,
+        color: "#ff4040",
+        opacity: 0.5,
+        width: 1
       },
-      interactivity: {
-        events: {
-          onhover: { enable: true, mode: "repulse" },
-          onclick: { enable: true, mode: "push" }
-        }
-      },
-      retina_detect: true
-    });
-
-    function switchTab(id) {
-      document.querySelectorAll('.container').forEach(c => c.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-    }
-
-    function toggleMode() {
-      document.body.classList.toggle("light-mode");
-    }
-
-    function playClick() {
-      const audio = document.getElementById("clickSound");
-      audio.currentTime = 0;
-      audio.play();
-    }
-
-    // Newsletter form submit handler
-    function handleNewsletterSubmit(event) {
-      event.preventDefault();
-      const emailInput = document.getElementById("emailInput");
-      const thankyouMessage = document.getElementById("thankyouMessage");
-
-      // Simple email validation
-      const email = emailInput.value.trim();
-      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailPattern.test(email)) {
-        alert("Please enter a valid email address.");
-        return false;
+      move: { enable: true, speed: 2 }
+    },
+    interactivity: {
+      events: {
+        onhover: { enable: true, mode: "repulse" },
+        onclick: { enable: true, mode: "push" }
       }
+    },
+    retina_detect: true
+  });
 
-      // Simulate form submission (replace this with your backend integration)
-      emailInput.value = "";
-      thankyouMessage.style.display = "block";
+  function switchTab(id) {
+    document.querySelectorAll('.container').forEach(c => c.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
 
-      // Hide message after 4 seconds
-      setTimeout(() => {
-        thankyouMessage.style.display = "none";
-      }, 4000);
+  function toggleMode() {
+    document.body.classList.toggle("light-mode");
+  }
 
-      return false;
+  function playClick() {
+    const audio = document.getElementById("clickSound");
+    audio.currentTime = 0;
+    audio.play();
+  }
+
+  // Simple comment section logic
+  function addComment(event) {
+    event.preventDefault();
+
+    const username = document.getElementById('username').value.trim();
+    const commentText = document.getElementById('commentText').value.trim();
+    if (!username || !commentText) return;
+
+    const commentsList = document.getElementById('commentsList');
+
+    const commentCard = document.createElement('div');
+    commentCard.style.background = 'rgba(255, 255, 255, 0.05)';
+    commentCard.style.borderRadius = '8px';
+    commentCard.style.padding = '15px';
+    commentCard.style.marginBottom = '10px';
+    commentCard.style.boxShadow = '0 0 8px rgba(0,0,0,0.4)';
+    commentCard.style.color = 'var(--text-color)';
+    commentCard.innerHTML = `<strong>${escapeHtml(username)}</strong><br>${escapeHtml(commentText)}`;
+
+    commentsList.prepend(commentCard);
+
+    document.getElementById('commentForm').reset();
+  }
+
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  // Simple newsletter subscription simulation
+  function subscribeNewsletter(event) {
+    event.preventDefault();
+    const emailInput = document.getElementById('emailInput');
+    const msg = document.getElementById('subscribeMsg');
+    const email = emailInput.value.trim();
+
+    if (validateEmail(email)) {
+      msg.style.color = '#4BB543'; // green success
+      msg.textContent = `Thanks for subscribing, ${email}! 🎉`;
+      emailInput.value = '';
+    } else {
+      msg.style.color = '#ff4040'; // red error
+      msg.textContent = 'Please enter a valid email address.';
     }
-  </script>
+  }
+
+  function validateEmail(email) {
+    const re = /^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$/;
+    return re.test(email.toLowerCase());
+  }
+</script>
 
 </body>
 </html>
