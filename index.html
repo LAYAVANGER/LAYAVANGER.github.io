@@ -23,21 +23,44 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--bg-color);
+      background: radial-gradient(circle at center, rgba(255,64,64,0.15) 0%, var(--bg-color) 80%);
       color: var(--text-color);
+      overflow-x: hidden;
+      position: relative;
       transition: all 0.3s ease;
     }
 
-    #particles-js {
+    body::before {
+      content: "";
       position: fixed;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(255, 64, 64, 0.25), transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(255, 64, 64, 0.2), transparent 40%);
+      animation: pulseGlow 6s ease-in-out infinite alternate;
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    @keyframes pulseGlow {
+      0% {
+        filter: blur(30px) brightness(1);
+        opacity: 0.8;
+      }
+      100% {
+        filter: blur(40px) brightness(1.2);
+        opacity: 0.6;
+      }
     }
 
     .tabs {
       text-align: center;
       padding: 20px;
+      z-index: 10;
+      position: relative;
     }
 
     .tab-button {
@@ -49,10 +72,12 @@
       border-radius: 8px;
       cursor: pointer;
       font-size: 16px;
+      transition: background-color 0.3s ease;
     }
 
-    .tab-button:hover {
+    .tab-button:hover, .tab-button:focus {
       background-color: var(--accent);
+      outline: none;
     }
 
     .container {
@@ -60,6 +85,10 @@
       padding: 40px 20px;
       min-height: 100vh;
       text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 10;
     }
 
     .container.active {
@@ -69,6 +98,7 @@
     h1 {
       color: var(--accent);
       font-size: 32px;
+      margin-bottom: 20px;
     }
 
     .card {
@@ -79,10 +109,17 @@
       max-width: 800px;
       box-shadow: 0 0 10px rgba(0,0,0,0.5);
       text-align: left;
+      transition: background 0.3s ease;
+    }
+
+    body.light-mode .card {
+      background: rgba(0, 0, 0, 0.05);
+      box-shadow: 0 0 10px rgba(255, 64, 64, 0.3);
     }
 
     .card h2 {
       color: var(--accent);
+      margin-top: 0;
     }
 
     .note {
@@ -96,99 +133,121 @@
       transition: 0.3s ease;
     }
 
+    a.tab-button {
+      display: inline-block;
+    }
+
     @media (max-width: 600px) {
       h1 {
         font-size: 24px;
       }
       .tab-button {
         font-size: 14px;
+        padding: 10px 14px;
       }
     }
   </style>
 </head>
 <body>
 
-<div id="particles-js"></div>
-
-<div class="tabs">
-  <button class="tab-button" onclick="switchTab('home'); playClick()">🏠 Home</button>
-  <button class="tab-button" onclick="switchTab('glitches'); playClick()">🛠️ GTA 5 Glitches</button>
+<div class="tabs" role="tablist" aria-label="Main navigation tabs">
+  <button class="tab-button" role="tab" aria-selected="true" aria-controls="home" id="tab-home" onclick="switchTab('home'); playClick()" tabindex="0">🏠 Home</button>
+  <button class="tab-button" role="tab" aria-selected="false" aria-controls="glitches" id="tab-glitches" onclick="switchTab('glitches'); playClick()" tabindex="-1">🛠️ GTA 5 Glitches</button>
+  <button class="tab-button" role="tab" aria-selected="false" aria-controls="gta6" id="tab-gta6" onclick="switchTab('gta6'); playClick()" tabindex="-1">🕵️‍♂️ GTA 6 Leaks & News</button>
   <button class="tab-button" onclick="toggleMode(); playClick()">🌓 Toggle Mode</button>
 </div>
 
 <!-- Home Section -->
-<div id="home" class="container active">
+<main id="home" class="container active" role="tabpanel" aria-labelledby="tab-home">
   <h1>🔥 Welcome to GTA 5 Glitch Hub</h1>
   <p>Your trusted source for GTA 5 glitches, both online and offline.</p>
-  <p><a href="https://youtube.com/@layavanger_1" target="_blank" class="tab-button">Visit Our YouTube Channel</a></p>
+  <p><a href="https://youtube.com/@layavanger_1" target="_blank" rel="noopener" class="tab-button" style="padding:12px 20px;">Visit Our YouTube Channel</a></p>
   <p class="note">This site is unofficial and fan-made. Use glitches responsibly to avoid bans.</p>
-</div>
+</main>
 
-<!-- Glitch Section -->
-<div id="glitches" class="container">
+<!-- Glitches Section -->
+<section id="glitches" class="container" role="tabpanel" aria-labelledby="tab-glitches" tabindex="0" hidden>
   <h1>🛠️ GTA 5 Glitches</h1>
+
   <div class="card">
     <h2>💰 Unlimited Money Glitch (GTA Online)</h2>
     <p><strong>How to do it:</strong><br>
-    1. Start the Cluckin Bell Farm Raid mission.<br>
-    2. At the mission prompt, access a custom playlist with specific Contact Missions.<br>
-    3. Follow the steps to trigger the glitch and receive $250,000 upon completion.</p>
+      1. Start the Cluckin Bell Farm Raid mission.<br>
+      2. At the mission prompt, access a custom playlist with specific Contact Missions.<br>
+      3. Follow the steps to trigger the glitch and receive $250,000 upon completion.</p>
     <p class="note">⚠️ Use with caution. Rockstar may patch this glitch or take action against exploiters.</p>
   </div>
 
   <div class="card">
     <h2>🛫 Cayo Perico Replay Glitch (GTA Online)</h2>
     <p><strong>How to do it:</strong><br>
-    1. Complete the Cayo Perico Heist.<br>
-    2. Before the final cutscene, disconnect your internet or close the game.<br>
-    3. Restart the game, and the heist should be available again.</p>
+      1. Complete the Cayo Perico Heist.<br>
+      2. Before the final cutscene, disconnect your internet or close the game.<br>
+      3. Restart the game, and the heist should be available again.</p>
     <p class="note">⚠️ Repeat sparingly to avoid detection. Always deposit your earnings before repeating.</p>
   </div>
 
   <div class="card">
     <h2>📈 Stock Market Exploit (GTA 5 Story Mode)</h2>
     <p><strong>How to do it:</strong><br>
-    1. Save Lester's assassination missions until after completing the main story.<br>
-    2. Invest in the relevant companies before each mission.<br>
-    3. Complete the mission and sell stocks at their peak.</p>
+      1. Save Lester's assassination missions until after completing the main story.<br>
+      2. Invest in the relevant companies before each mission.<br>
+      3. Complete the mission and sell stocks at their peak.</p>
     <p class="note">💡 This is an in-game strategy and not considered a glitch. Safe to use.</p>
   </div>
-</div>
+</section>
+
+<!-- GTA 6 Leaks & News Section -->
+<section id="gta6" class="container" role="tabpanel" aria-labelledby="tab-gta6" tabindex="0" hidden>
+  <h1>🕵️‍♂️ Verified GTA 6 Leaks & News</h1>
+
+  <div class="card">
+    <h2>🎮 GTA 6 Release Date (Rumored)</h2>
+    <p>According to reliable insider sources, Rockstar Games is expected to release GTA 6 in <strong>late 2025</strong>, possibly Q4. No official date has been announced yet.</p>
+    <p class="note">⚠️ Remember, leaks are unofficial and may change. Stay tuned for Rockstar’s official announcements.</p>
+  </div>
+
+  <div class="card">
+    <h2>🗺️ Map & Location Details</h2>
+    <p>Leaked footage and data miners suggest the next GTA installment features a sprawling map including Miami-inspired Vice City, with multiple islands and dynamic weather systems.</p>
+  </div>
+
+  <div class="card">
+    <h2>🔧 Online Features & GTA 5 Glitches Info</h2>
+    <p><strong>GTA 5 Glitches Online & Offline:</strong></p>
+    <ul>
+      <li>Many online glitches are patched regularly; use them cautiously to avoid bans.</li>
+      <li>Offline glitches such as stock market exploits remain safe to use.</li>
+      <li>Our site provides detailed guides on how to perform glitches safely.</li>
+    </ul>
+  </div>
+</section>
 
 <!-- Click Sound -->
 <audio id="clickSound" src="https://assets.mixkit.co/sfx/preview/mixkit-click-1109.wav"></audio>
 
-<!-- Particle JS -->
-<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script>
-  particlesJS("particles-js", {
-    particles: {
-      number: { value: 80 },
-      color: { value: "#ff4040" },
-      shape: { type: "circle" },
-      opacity: { value: 0.4 },
-      size: { value: 3 },
-      line_linked: {
-        enable: true,
-        distance: 130,
-        color: "#ff4040",
-        opacity: 0.5,
-        width: 1
-      },
-      move: { enable: true, speed: 2 }
-    },
-    interactivity: {
-      events: {
-        onhover: { enable: true, mode: "repulse" },
-        onclick: { enable: true, mode: "push" }
-      }
-    },
-    retina_detect: true
-  });
-
+  // Tab switching logic with ARIA update
   function switchTab(id) {
-    document.querySelectorAll('.container').forEach(c => c.classList.remove('active'));
+    const tabs = document.querySelectorAll('.tab-button[role="tab"]');
+    const containers = document.querySelectorAll('[role="tabpanel"]');
+
+    containers.forEach(panel => {
+      panel.classList.remove('active');
+      panel.setAttribute('hidden', 'true');
+    });
+    tabs.forEach(tab => {
+      tab.setAttribute('aria-selected', 'false');
+      tab.setAttribute('tabindex', '-1');
+    });
+
     document.getElementById(id).classList.add('active');
+    document.getElementById(id).removeAttribute('hidden');
+
+    const activeTab = document.querySelector(`.tab-button[aria-controls="${id}"]`);
+    activeTab.setAttribute('aria-selected', 'true');
+    activeTab.setAttribute('tabindex', '0');
+    activeTab.focus();
   }
 
   function toggleMode() {
