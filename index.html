@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>GTA 5 Glitch Hub</title>
+  <title>GTA 5 Glitch Hub - Verified GTA 5 Glitches & GTA 6 News</title>
+  <meta name="description" content="Your trusted source for GTA 5 glitches online & offline, plus verified GTA 6 leaks and release date rumors." />
+  <meta name="keywords" content="GTA 5 glitches, GTA 5 online glitches, GTA 5 offline glitches, GTA 6 leaks, GTA 6 news, Rockstar Games, GTA 5 glitch hub" />
+  <meta name="author" content="Layavanger" />
   <style>
     :root {
       --bg-color: #ffffff;
@@ -75,6 +78,8 @@
       padding: 40px 20px;
       min-height: 100vh;
       text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
     }
 
     .container.active {
@@ -111,12 +116,59 @@
       transition: 0.3s ease;
     }
 
+    form.newsletter {
+      margin-top: 25px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    form.newsletter input[type="email"] {
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: none;
+      width: 250px;
+      max-width: 100%;
+    }
+
+    form.newsletter button {
+      background-color: var(--button-bg);
+      color: var(--button-text);
+      border: none;
+      padding: 12px 25px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    form.newsletter button:hover {
+      background-color: var(--accent);
+    }
+
+    .thankyou-message {
+      margin-top: 15px;
+      color: #7fff7f;
+      font-weight: bold;
+      display: none;
+    }
+
     @media (max-width: 600px) {
       h1 {
         font-size: 24px;
       }
       .tab-button {
         font-size: 14px;
+      }
+      form.newsletter {
+        flex-direction: column;
+      }
+      form.newsletter input[type="email"],
+      form.newsletter button {
+        width: 100%;
+        max-width: none;
       }
     }
   </style>
@@ -138,6 +190,12 @@
   <p>Your trusted source for GTA 5 glitches, both online and offline.</p>
   <p><a href="https://youtube.com/@layavanger_1" target="_blank" class="tab-button">Visit Our YouTube Channel</a></p>
   <p class="note">This site is unofficial and fan-made. Use glitches responsibly to avoid bans.</p>
+
+  <form class="newsletter" id="newsletterForm" onsubmit="return handleNewsletterSubmit(event)">
+    <input type="email" id="emailInput" placeholder="Enter your email for updates" required />
+    <button type="submit">Subscribe</button>
+  </form>
+  <p class="thankyou-message" id="thankyouMessage">Thank you for subscribing!</p>
 </div>
 
 <!-- Glitch Section -->
@@ -238,6 +296,32 @@
     const audio = document.getElementById("clickSound");
     audio.currentTime = 0;
     audio.play();
+  }
+
+  // Newsletter form submit handler
+  function handleNewsletterSubmit(event) {
+    event.preventDefault();
+    const emailInput = document.getElementById("emailInput");
+    const thankyouMessage = document.getElementById("thankyouMessage");
+
+    // Simple email validation
+    const email = emailInput.value.trim();
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      alert("Please enter a valid email address.");
+      return false;
+    }
+
+    // Simulate form submission (replace this with your backend integration)
+    emailInput.value = "";
+    thankyouMessage.style.display = "block";
+
+    // Hide message after 4 seconds
+    setTimeout(() => {
+      thankyouMessage.style.display = "none";
+    }, 4000);
+
+    return false;
   }
 </script>
 
