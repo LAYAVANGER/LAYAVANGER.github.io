@@ -235,6 +235,8 @@
 <!-- Glitch Section -->
 <div id="glitches" class="container">
   <h1>🛠️ GTA 5 Glitches</h1>
+
+  <!-- Existing glitches -->
   <div class="card">
     <h2>💰 Unlimited Money Glitch (GTA Online)</h2>
     <p><strong>How to do it:</strong><br>
@@ -261,6 +263,45 @@
     3. Complete the mission and sell stocks at their peak.</p>
     <p class="note">💡 This is an in-game strategy and not considered a glitch. Safe to use.</p>
   </div>
+
+  <!-- New GTA Online glitches -->
+  <div class="card">
+    <h2>🚗 Vehicle Duplication Glitch (GTA Online)</h2>
+    <p><strong>How to do it:</strong><br>
+    1. Enter your vehicle and drive to a garage.<br>
+    2. Use the "Export Vehicle" option in the garage.<br>
+    3. While exporting, exit the game or disconnect internet to trick the game.<br>
+    4. Upon reloading, your vehicle will be duplicated.</p>
+    <p class="note">⚠️ Rockstar frequently patches this glitch. Use carefully to avoid bans.</p>
+  </div>
+
+  <div class="card">
+    <h2>💥 God Mode Glitch (Temporary Invincibility)</h2>
+    <p><strong>How to do it:</strong><br>
+    1. Have a friend revive you with the revive option in a heist or mission.<br>
+    2. Quickly switch sessions or jobs immediately after being revived.<br>
+    3. You may retain temporary invincibility for a short period.</p>
+    <p class="note">⚠️ This is very temporary and may be patched. Use with caution.</p>
+  </div>
+
+  <div class="card">
+    <h2>🎯 Aim Assist Exploit (Controller Users)</h2>
+    <p><strong>How to do it:</strong><br>
+    1. Enable aim assist in controller settings.<br>
+    2. Use certain scoped weapons during missions.<br>
+    3. Exploit the aim assist to quickly lock targets with high precision.</p>
+    <p class="note">⚠️ Using this exploit in competitive modes may result in penalties.</p>
+  </div>
+
+  <div class="card">
+    <h2>🕶️ Invisible Body Glitch (GTA Online)</h2>
+    <p><strong>How to do it:</strong><br>
+    1. Join a job or mission with a friend.<br>
+    2. When the mission starts, switch to a different character quickly.<br>
+    3. Return to your main character to find your body invisible to others.</p>
+    <p class="note">⚠️ May cause game instability. Use carefully and save progress often.</p>
+  </div>
+
 </div>
 
 <!-- GTA 6 Leaks Section -->
@@ -285,113 +326,80 @@
 <!-- Comments Section -->
 <div id="comments" class="container">
   <h1>💬 Comments</h1>
-  <form id="commentForm" onsubmit="addComment(event)">
-    <input type="text" id="username" placeholder="Your name" required />
-    <input type="text" id="commentText" placeholder="Your comment" required />
-    <button type="submit">Post</button>
+  <form id="commentForm" onsubmit="postComment(event)">
+    <input type="text" id="username" placeholder="Your Name" required />
+    <input type="text" id="comment" placeholder="Your Comment" required />
+    <button type="submit">Post Comment</button>
   </form>
   <div id="commentsList"></div>
 </div>
 
-<!-- Click Sound -->
-<audio id="clickSound" src="https://assets.mixkit.co/sfx/preview/mixkit-click-1109.wav"></audio>
-
-<!-- Particle JS -->
-<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <script>
-  particlesJS("particles-js", {
-    particles: {
-      number: { value: 80 },
-      color: { value: "#ff4040" },
-      shape: { type: "circle" },
-      opacity: { value: 0.4 },
-      size: { value: 3 },
-      line_linked: {
-        enable: true,
-        distance: 130,
-        color: "#ff4040",
-        opacity: 0.5,
-        width: 1
-      },
-      move: { enable: true, speed: 2 }
-    },
-    interactivity: {
-      events: {
-        onhover: { enable: true, mode: "repulse" },
-        onclick: { enable: true, mode: "push" }
-      }
-    },
-    retina_detect: true
+  // Particle background config
+  particlesJS.load('particles-js', 'https://cdn.jsdelivr.net/gh/VincentGarreau/particles.js/particles.json', function() {
+    console.log('particles.js loaded');
   });
 
-  function switchTab(id) {
-    document.querySelectorAll('.container').forEach(c => c.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
+  // Tab switching logic
+  function switchTab(tabId) {
+    const containers = document.querySelectorAll('.container');
+    containers.forEach(c => c.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
   }
 
+  // Dark/Light mode toggle
   function toggleMode() {
-    document.body.classList.toggle("light-mode");
+    document.body.classList.toggle('light-mode');
   }
 
+  // Simple click sound for UI feedback
   function playClick() {
-    const audio = document.getElementById("clickSound");
-    audio.currentTime = 0;
+    const audio = new Audio('https://actions.google.com/sounds/v1/ui/click.ogg');
     audio.play();
   }
 
-  // Simple comment section logic
-  function addComment(event) {
-    event.preventDefault();
+  // Newsletter subscribe
+  function subscribeNewsletter(e) {
+    e.preventDefault();
+    const email = document.getElementById('emailInput').value.trim();
+    if (!email) return;
+    // Fake subscription process (replace with backend integration)
+    document.getElementById('subscribeMsg').textContent = `Thanks for subscribing, ${email}!`;
+    e.target.reset();
+  }
 
+  // Comments functionality (simple localStorage persistence)
+  const commentForm = document.getElementById('commentForm');
+  const commentsList = document.getElementById('commentsList');
+
+  function loadComments() {
+    const comments = JSON.parse(localStorage.getItem('gta5_comments') || '[]');
+    commentsList.innerHTML = '';
+    comments.forEach(({username, comment}) => {
+      const div = document.createElement('div');
+      div.innerHTML = `<strong>${sanitize(username)}</strong>: ${sanitize(comment)}`;
+      commentsList.appendChild(div);
+    });
+  }
+
+  function postComment(e) {
+    e.preventDefault();
     const username = document.getElementById('username').value.trim();
-    const commentText = document.getElementById('commentText').value.trim();
-    if (!username || !commentText) return;
-
-    const commentsList = document.getElementById('commentsList');
-
-    const commentCard = document.createElement('div');
-    commentCard.style.background = 'rgba(255, 255, 255, 0.05)';
-    commentCard.style.borderRadius = '8px';
-    commentCard.style.padding = '15px';
-    commentCard.style.marginBottom = '10px';
-    commentCard.style.boxShadow = '0 0 8px rgba(0,0,0,0.4)';
-    commentCard.style.color = 'var(--text-color)';
-    commentCard.innerHTML = `<strong>${escapeHtml(username)}</strong><br>${escapeHtml(commentText)}`;
-
-    commentsList.prepend(commentCard);
-
-    document.getElementById('commentForm').reset();
+    const comment = document.getElementById('comment').value.trim();
+    if (!username || !comment) return;
+    const comments = JSON.parse(localStorage.getItem('gta5_comments') || '[]');
+    comments.push({username, comment});
+    localStorage.setItem('gta5_comments', JSON.stringify(comments));
+    loadComments();
+    e.target.reset();
   }
 
-  function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
+  function sanitize(str) {
+    return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
 
-  // Simple newsletter subscription simulation
-  function subscribeNewsletter(event) {
-    event.preventDefault();
-    const emailInput = document.getElementById('emailInput');
-    const msg = document.getElementById('subscribeMsg');
-    const email = emailInput.value.trim();
-
-    if (validateEmail(email)) {
-      msg.style.color = '#4BB543'; // green success
-      msg.textContent = `Thanks for subscribing, ${email}! 🎉`;
-      emailInput.value = '';
-    } else {
-      msg.style.color = '#ff4040'; // red error
-      msg.textContent = 'Please enter a valid email address.';
-    }
-  }
-
-  function validateEmail(email) {
-    const re = /^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$/;
-    return re.test(email.toLowerCase());
-  }
+  loadComments();
 </script>
-
 </body>
 </html>
