@@ -2,404 +2,114 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>GTA 5 Glitch Hub | Verified Glitches & GTA 6 News</title>
-  <meta name="description" content="Your trusted source for verified GTA 5 glitches (online & offline), GTA 6 leaks, release date rumors, and detailed guides to avoid bans." />
-  <meta name="keywords" content="GTA5, GTA 5 glitches, GTA 6 leaks, GTA Online, Rockstar Games, gaming glitches, GTA 5 money glitch" />
-  <meta name="author" content="layavanger" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Multiplayer Car Racing</title>
   <style>
-    :root {
-      --bg-color: #0f0f0f;
-      --text-color: #ffffff;
-      --accent: #ff4040;
-      --button-bg: #ff4040;
-      --button-text: #000000;
-    }
-
-    body.light-mode {
-      --bg-color: #ffffff;
-      --text-color: #000000;
-      --button-bg: #000000;
-      --button-text: #ffffff;
-    }
-
-    body {
+    html, body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: radial-gradient(circle at center, #1e1e1e 0%, #0b0b0b 80%);
-      background-image:
-        url('https://cdn.wallpapersafari.com/21/21/8jo0qs.jpg'),
-        radial-gradient(circle at center, #1e1e1e 0%, #0b0b0b 80%);
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center center;
-      color: var(--text-color);
-      transition: all 0.3s ease;
-      min-height: 100vh;
-      overflow-x: hidden;
+      padding: 0;
+      overflow: hidden;
+      background: #111;
+      color: white;
+      font-family: Arial, sans-serif;
     }
-
-    body.light-mode {
-      background: #f9f9f9;
-      color: var(--text-color);
-    }
-
-    #particles-js {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      opacity: 0.25;
-    }
-
-    .tabs {
-      text-align: center;
-      padding: 20px;
-      background-color: rgba(15,15,15,0.85);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 10px rgba(255, 64, 64, 0.3);
-    }
-
-    .tab-button {
-      background-color: var(--button-bg);
-      color: var(--button-text);
-      margin: 10px;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 16px;
-      transition: background-color 0.3s ease;
-    }
-
-    .tab-button:hover {
-      background-color: var(--accent);
-    }
-
-    .container {
-      display: none;
-      padding: 40px 20px;
-      min-height: 80vh;
-      max-width: 900px;
-      margin: 0 auto 50px auto;
-      text-align: center;
-      background: rgba(255,255,255,0.05);
-      border-radius: 16px;
-      box-shadow: 0 0 20px rgba(255,64,64,0.25);
-      backdrop-filter: blur(10px);
-    }
-
-    .container.active {
+    canvas {
       display: block;
+      background: #222;
     }
-
-    h1 {
-      color: var(--accent);
-      font-size: 32px;
-      margin-bottom: 20px;
-    }
-
-    .card {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 20px;
-      margin: 20px auto;
-      max-width: 800px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
-      text-align: left;
-      color: var(--text-color);
-    }
-
-    .card h2 {
-      color: var(--accent);
-    }
-
-    .note {
-      font-size: 14px;
-      color: #aaa;
-      margin-top: 10px;
-    }
-
-    a, button {
-      text-decoration: none;
-      transition: 0.3s ease;
-    }
-
-    form#newsletterForm {
-      margin-top: 20px;
-    }
-
-    input[type="email"] {
+    #ui {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(0,0,0,0.5);
       padding: 10px;
       border-radius: 8px;
-      border: none;
-      width: 250px;
-      max-width: 90vw;
-      margin-right: 10px;
     }
-
-    button#subscribeBtn {
-      padding: 10px 20px;
-      background-color: var(--accent);
-      border: none;
-      border-radius: 8px;
-      color: #000;
-      cursor: pointer;
-      font-weight: 600;
-      transition: background-color 0.3s ease;
-    }
-
-    button#subscribeBtn:hover {
-      background-color: #ff6b6b;
-    }
-
-    /* Comment section styles */
-    #commentSection h1 {
-      margin-bottom: 15px;
-    }
-
-    #commentForm input[type="text"] {
-      padding: 8px;
-      border-radius: 5px;
-      border: none;
-      margin-right: 10px;
-      max-width: 45%;
-    }
-
-    #commentForm button {
-      padding: 8px 15px;
-      border: none;
-      border-radius: 5px;
-      background: var(--accent);
-      color: #000;
-      cursor: pointer;
-    }
-
-    #commentsList > div {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 8px;
-      padding: 15px;
-      margin-bottom: 10px;
-      box-shadow: 0 0 8px rgba(0,0,0,0.4);
-      color: var(--text-color);
-      text-align: left;
-    }
-
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 24px;
-      }
-      .tab-button {
-        font-size: 14px;
-        padding: 10px 14px;
-      }
-      #commentForm input[type="text"] {
-        max-width: 100%;
-        margin-bottom: 10px;
-      }
-      #commentForm button {
-        width: 100%;
-      }
+    #playerID {
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-
-<div id="particles-js"></div>
-
-<div class="tabs">
-  <button class="tab-button" onclick="switchTab('home'); playClick()">🏠 Home</button>
-  <button class="tab-button" onclick="switchTab('glitches'); playClick()">🛠️ GTA 5 Glitches</button>
-  <button class="tab-button" onclick="switchTab('leaks'); playClick()">📰 GTA 6 Leaks & News</button>
-  <button class="tab-button" onclick="switchTab('comments'); playClick()">💬 Comments</button>
-  <button class="tab-button" onclick="toggleMode(); playClick()">🌓 Toggle Mode</button>
+<canvas id="gameCanvas"></canvas>
+<div id="ui">
+  Your ID: <span id="playerID">...</span>
 </div>
 
-<!-- Home Section -->
-<div id="home" class="container active">
-  <h1>🔥 Welcome to GTA 5 Glitch Hub</h1>
-  <p>Your trusted source for GTA 5 glitches, both online and offline.</p>
-  <p><a href="https://youtube.com/@layavanger_1" target="_blank" class="tab-button" style="display:inline-block; margin-top:15px;">Visit Our YouTube Channel</a></p>
-  <p class="note">This site is unofficial and fan-made. Use glitches responsibly to avoid bans.</p>
-
-  <h2>Subscribe to our newsletter</h2>
-  <form id="newsletterForm" onsubmit="subscribeNewsletter(event)">
-    <input type="email" id="emailInput" placeholder="Enter your email" required />
-    <button id="subscribeBtn" type="submit">Subscribe</button>
-  </form>
-  <p id="subscribeMsg" style="margin-top:10px; font-size:14px;"></p>
-</div>
-
-<!-- Glitch Section -->
-<div id="glitches" class="container">
-  <h1>🛠️ GTA 5 Glitches</h1>
-
-  <!-- Existing glitches -->
-  <div class="card">
-    <h2>💰 Unlimited Money Glitch (GTA Online)</h2>
-    <p><strong>How to do it:</strong><br>
-    1. Start the Cluckin Bell Farm Raid mission.<br>
-    2. At the mission prompt, access a custom playlist with specific Contact Missions.<br>
-    3. Follow the steps to trigger the glitch and receive $250,000 upon completion.</p>
-    <p class="note">⚠️ Use with caution. Rockstar may patch this glitch or take action against exploiters.</p>
-  </div>
-
-  <div class="card">
-    <h2>🛫 Cayo Perico Replay Glitch (GTA Online)</h2>
-    <p><strong>How to do it:</strong><br>
-    1. Complete the Cayo Perico Heist.<br>
-    2. Before the final cutscene, disconnect your internet or close the game.<br>
-    3. Restart the game, and the heist should be available again.</p>
-    <p class="note">⚠️ Repeat sparingly to avoid detection. Always deposit your earnings before repeating.</p>
-  </div>
-
-  <div class="card">
-    <h2>📈 Stock Market Exploit (GTA 5 Story Mode)</h2>
-    <p><strong>How to do it:</strong><br>
-    1. Save Lester's assassination missions until after completing the main story.<br>
-    2. Invest in the relevant companies before each mission.<br>
-    3. Complete the mission and sell stocks at their peak.</p>
-    <p class="note">💡 This is an in-game strategy and not considered a glitch. Safe to use.</p>
-  </div>
-
-  <!-- New GTA Online glitches -->
-  <div class="card">
-    <h2>🚗 Vehicle Duplication Glitch (GTA Online)</h2>
-    <p><strong>How to do it:</strong><br>
-    1. Enter your vehicle and drive to a garage.<br>
-    2. Use the "Export Vehicle" option in the garage.<br>
-    3. While exporting, exit the game or disconnect internet to trick the game.<br>
-    4. Upon reloading, your vehicle will be duplicated.</p>
-    <p class="note">⚠️ Rockstar frequently patches this glitch. Use carefully to avoid bans.</p>
-  </div>
-
-  <div class="card">
-    <h2>💥 God Mode Glitch (Temporary Invincibility)</h2>
-    <p><strong>How to do it:</strong><br>
-    1. Have a friend revive you with the revive option in a heist or mission.<br>
-    2. Quickly switch sessions or jobs immediately after being revived.<br>
-    3. You may retain temporary invincibility for a short period.</p>
-    <p class="note">⚠️ This is very temporary and may be patched. Use with caution.</p>
-  </div>
-
-  <div class="card">
-    <h2>🎯 Aim Assist Exploit (Controller Users)</h2>
-    <p><strong>How to do it:</strong><br>
-    1. Enable aim assist in controller settings.<br>
-    2. Use certain scoped weapons during missions.<br>
-    3. Exploit the aim assist to quickly lock targets with high precision.</p>
-    <p class="note">⚠️ Using this exploit in competitive modes may result in penalties.</p>
-  </div>
-
-  <div class="card">
-    <h2>🕶️ Invisible Body Glitch (GTA Online)</h2>
-    <p><strong>How to do it:</strong><br>
-    1. Join a job or mission with a friend.<br>
-    2. When the mission starts, switch to a different character quickly.<br>
-    3. Return to your main character to find your body invisible to others.</p>
-    <p class="note">⚠️ May cause game instability. Use carefully and save progress often.</p>
-  </div>
-
-</div>
-
-<!-- GTA 6 Leaks Section -->
-<div id="leaks" class="container">
-  <h1>📰 GTA 6 Leaks & News</h1>
-  <div class="card">
-    <h2>🚨 Verified GTA 6 Leak Highlights</h2>
-    <ul>
-      <li>📅 Possible Release Date: Late 2025 to Early 2026 (unconfirmed, rumors only)</li>
-      <li>🌍 Setting: Multiple cities with dynamic weather & time systems.</li>
-      <li>🎮 New Gameplay Features: Enhanced NPC AI, new heists, and expanded multiplayer modes.</li>
-      <li>🛠️ Rockstar actively patching exploits and glitches from early beta leaks.</li>
-    </ul>
-    <p class="note">⚠️ Remember: These are leaks & rumors only. Official Rockstar announcements come first!</p>
-  </div>
-  <div class="card">
-    <h2>📰 Stay Updated</h2>
-    <p>Follow our newsletter & social channels to never miss verified GTA 6 news & updates.</p>
-  </div>
-</div>
-
-<!-- Comments Section -->
-<div id="comments" class="container">
-  <h1>💬 Comments</h1>
-  <form id="commentForm" onsubmit="postComment(event)">
-    <input type="text" id="username" placeholder="Your Name" required />
-    <input type="text" id="comment" placeholder="Your Comment" required />
-    <button type="submit">Post Comment</button>
-  </form>
-  <div id="commentsList"></div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
 <script>
-  // Particle background config
-  particlesJS.load('particles-js', 'https://cdn.jsdelivr.net/gh/VincentGarreau/particles.js/particles.json', function() {
-    console.log('particles.js loaded');
+  // Firebase config (replace with your own Firebase project config)
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT.firebaseapp.com",
+    databaseURL: "https://YOUR_PROJECT.firebaseio.com",
+    projectId: "YOUR_PROJECT",
+    storageBucket: "YOUR_PROJECT.appspot.com",
+    messagingSenderId: "SENDER_ID",
+    appId: "APP_ID"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+
+  // Setup canvas
+  const canvas = document.getElementById('gameCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const playerID = Math.random().toString(36).substring(2, 8);
+  document.getElementById('playerID').textContent = playerID;
+
+  const playersRef = db.ref('racingGame/players');
+
+  const player = {
+    id: playerID,
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    color: '#' + Math.floor(Math.random()*16777215).toString(16),
+    timestamp: Date.now()
+  };
+
+  playersRef.child(playerID).set(player);
+  playersRef.child(playerID).onDisconnect().remove();
+
+  const keys = {};
+  window.addEventListener('keydown', e => keys[e.key] = true);
+  window.addEventListener('keyup', e => keys[e.key] = false);
+
+  function updatePlayer() {
+    if (keys['ArrowUp']) player.y -= 3;
+    if (keys['ArrowDown']) player.y += 3;
+    if (keys['ArrowLeft']) player.x -= 3;
+    if (keys['ArrowRight']) player.x += 3;
+    player.timestamp = Date.now();
+    playersRef.child(playerID).set(player);
+  }
+
+  let otherPlayers = {};
+  playersRef.on('value', snapshot => {
+    otherPlayers = snapshot.val() || {};
   });
 
-  // Tab switching logic
-  function switchTab(tabId) {
-    const containers = document.querySelectorAll('.container');
-    containers.forEach(c => c.classList.remove('active'));
-    document.getElementById(tabId).classList.add('active');
+  function drawPlayers() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let id in otherPlayers) {
+      const p = otherPlayers[id];
+      ctx.fillStyle = p.color;
+      ctx.fillRect(p.x, p.y, 30, 30);
+      ctx.fillStyle = 'white';
+      ctx.fillText(id, p.x, p.y - 5);
+    }
   }
 
-  // Dark/Light mode toggle
-  function toggleMode() {
-    document.body.classList.toggle('light-mode');
+  function gameLoop() {
+    updatePlayer();
+    drawPlayers();
+    requestAnimationFrame(gameLoop);
   }
 
-  // Simple click sound for UI feedback
-  function playClick() {
-    const audio = new Audio('https://actions.google.com/sounds/v1/ui/click.ogg');
-    audio.play();
-  }
-
-  // Newsletter subscribe
-  function subscribeNewsletter(e) {
-    e.preventDefault();
-    const email = document.getElementById('emailInput').value.trim();
-    if (!email) return;
-    // Fake subscription process (replace with backend integration)
-    document.getElementById('subscribeMsg').textContent = `Thanks for subscribing, ${email}!`;
-    e.target.reset();
-  }
-
-  // Comments functionality (simple localStorage persistence)
-  const commentForm = document.getElementById('commentForm');
-  const commentsList = document.getElementById('commentsList');
-
-  function loadComments() {
-    const comments = JSON.parse(localStorage.getItem('gta5_comments') || '[]');
-    commentsList.innerHTML = '';
-    comments.forEach(({username, comment}) => {
-      const div = document.createElement('div');
-      div.innerHTML = `<strong>${sanitize(username)}</strong>: ${sanitize(comment)}`;
-      commentsList.appendChild(div);
-    });
-  }
-
-  function postComment(e) {
-    e.preventDefault();
-    const username = document.getElementById('username').value.trim();
-    const comment = document.getElementById('comment').value.trim();
-    if (!username || !comment) return;
-    const comments = JSON.parse(localStorage.getItem('gta5_comments') || '[]');
-    comments.push({username, comment});
-    localStorage.setItem('gta5_comments', JSON.stringify(comments));
-    loadComments();
-    e.target.reset();
-  }
-
-  function sanitize(str) {
-    return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-  }
-
-  loadComments();
+  gameLoop();
 </script>
 </body>
 </html>
