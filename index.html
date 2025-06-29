@@ -39,20 +39,20 @@
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
 <script>
-  // Firebase config (replace with your own Firebase project config)
+  // Firebase config (replaced with your real project info)
   const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
-    databaseURL: "https://YOUR_PROJECT.firebaseio.com",
-    projectId: "YOUR_PROJECT",
-    storageBucket: "YOUR_PROJECT.appspot.com",
-    messagingSenderId: "SENDER_ID",
-    appId: "APP_ID"
+    apiKey: "AIzaSyCDyyx9V85E5Wqtwbo-a0YPDqtTOt2chAA",
+    authDomain: "gta-racing-hub.firebaseapp.com",
+    databaseURL: "https://gta-racing-hub-default-rtdb.firebaseio.com",
+    projectId: "gta-racing-hub",
+    storageBucket: "gta-racing-hub.firebasestorage.app",
+    messagingSenderId: "546491914038",
+    appId: "1:546491914038:web:178635b8c5cc217bc24597",
+    measurementId: "G-Q7GJG03N9B"
   };
   firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
 
-  // Setup canvas
   const canvas = document.getElementById('gameCanvas');
   const ctx = canvas.getContext('2d');
   canvas.width = window.innerWidth;
